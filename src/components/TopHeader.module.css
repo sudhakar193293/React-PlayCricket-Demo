@@ -1,0 +1,28 @@
+.container{
+    padding: 10px 25px 10px 25px;
+}
+.custom>li{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.custom >li>a{
+    color: #3B4954;
+    text-decoration: none;
+    font-family: Avenir Next Condensed;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 1%;
+    text-align: right;
+    vertical-align: middle;
+    padding-left: 6px;
+
+}
+.divider{
+    display: inline-block;
+    width: 2px;
+    height: 20px;
+    background-color: #7BC058;
+}

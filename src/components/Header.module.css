@@ -1,0 +1,7 @@
+.ct::after {
+    display: none !important;
+}
+/* .arrow:hover{
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
+} */

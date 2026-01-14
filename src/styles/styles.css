@@ -1,0 +1,55 @@
+.custom-toggle{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.arrow{
+    transition: transform 0.25s ease;
+}
+.custom-toggle:hover .arrow{
+    transform: rotate(90deg)
+}
+.dropdown.show > .custom-toggle .arrow{
+    transform: rotate(90deg);
+}
+.arrow.rotate{
+   transform: rotate(90deg); 
+}
+
+
+
+
+
+
+/* Position nested submenus */
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu > .inner-menu {
+    position: absolute;
+    top:100%;
+    left:0;
+    display: none;
+    min-width: 100%;
+    border-top: none;
+    z-index: 1050;
+}
+.dropdown-submenu.show > .inner-menu{
+    display: block;
+}
+
+/* Position the nested menu to the right of its parent item */
+/* .dropdown-submenu > .dropdown-menu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 0.1rem;
+  display: none;
+  min-width: 180px;
+  z-index: 1000;
+}
+
+.dropdown-submenu.show > .dropdown-menu{
+    display: block;
+} */
+
