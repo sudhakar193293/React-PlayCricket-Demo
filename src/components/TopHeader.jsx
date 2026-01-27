@@ -3,7 +3,7 @@ import styles from './topHeader.module.css';
 import logo from '../assets/PC Admin logo_primary.png'
 import styl from './header.module.css';
 
-export default function TopHeader({clubs,sendData, onMenuClick}){
+export default function TopHeader({clubs,sendData, onMenuClick, data}){
     const [showClubs, setShowClubs] = useState(false);
      const notifyRef = useRef(null)
     useEffect(()=>{
@@ -38,15 +38,24 @@ export default function TopHeader({clubs,sendData, onMenuClick}){
                     </svg>
                     <span className={`mx-2 ${styles.divider}`}></span>
                     </li>
-                    <li>
-                    <a href="#" className="text-decoration-none">My Account</a>
+                    {data.userInfo.signedIn === false ? 
+                    <li className={`text-decoration-none dropdown ${showClubs ? 'show' : null}`} ref={notifyRef}>
+                    <a href="#" className="text-decoration-none">Sign In</a>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1C18.072 1 23 5.928 23 12C23 18.072 18.072 23 12 23C5.928 23 1 18.072 1 12C1 5.928 5.928 1 12 1ZM12 13C9.78944 13 8.37066 13.9834 7.4502 15.2217C6.66684 16.2756 6.247 17.522 6.0752 18.5C7.64021 19.9278 9.72045 20.7998 12 20.7998C14.2793 20.7998 16.3589 19.9276 17.9238 18.5C17.752 17.5221 17.3331 16.2755 16.5498 15.2217C15.6293 13.9834 14.2106 13 12 13ZM12 3.2002C7.149 3.2002 3.2002 7.149 3.2002 12C3.2002 13.6869 3.67892 15.2639 4.50586 16.6045C4.80047 15.7483 5.2346 14.8504 5.8457 14.0283C6.74038 12.8248 8.01455 11.7928 9.74121 11.3037C8.68904 10.584 8 9.37436 8 8C8 5.78667 9.78667 4 12 4C14.2133 4 16 5.78667 16 8C16 9.37465 15.3104 10.584 14.2578 11.3037C15.9849 11.7927 17.2595 12.8246 18.1543 14.0283C18.7653 14.8503 19.1986 15.7484 19.4932 16.6045C20.3203 15.2638 20.7998 13.6871 20.7998 12C20.7998 7.149 16.851 3.2002 12 3.2002ZM12 6C10.8912 6 10 6.89124 10 8C10 9.10876 10.8912 10 12 10C13.1088 10 14 9.10876 14 8C14 6.89124 13.1088 6 12 6Z" fill="#7BC058"/>
+                    </svg>
+                    {/* <span className={`mx-2 ${styles.divider}`}></span> */}
+                    </li>:
+                    <>
+                    <li className={`text-decoration-none dropdown ${showClubs ? 'show' : null}`} ref={notifyRef}>
+                    <a href="#" className="text-decoration-none" onClick={()=>{onMenuClick('myaccount');}}>My Account</a>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 1C18.072 1 23 5.928 23 12C23 18.072 18.072 23 12 23C5.928 23 1 18.072 1 12C1 5.928 5.928 1 12 1ZM12 13C9.78944 13 8.37066 13.9834 7.4502 15.2217C6.66684 16.2756 6.247 17.522 6.0752 18.5C7.64021 19.9278 9.72045 20.7998 12 20.7998C14.2793 20.7998 16.3589 19.9276 17.9238 18.5C17.752 17.5221 17.3331 16.2755 16.5498 15.2217C15.6293 13.9834 14.2106 13 12 13ZM12 3.2002C7.149 3.2002 3.2002 7.149 3.2002 12C3.2002 13.6869 3.67892 15.2639 4.50586 16.6045C4.80047 15.7483 5.2346 14.8504 5.8457 14.0283C6.74038 12.8248 8.01455 11.7928 9.74121 11.3037C8.68904 10.584 8 9.37436 8 8C8 5.78667 9.78667 4 12 4C14.2133 4 16 5.78667 16 8C16 9.37465 15.3104 10.584 14.2578 11.3037C15.9849 11.7927 17.2595 12.8246 18.1543 14.0283C18.7653 14.8503 19.1986 15.7484 19.4932 16.6045C20.3203 15.2638 20.7998 13.6871 20.7998 12C20.7998 7.149 16.851 3.2002 12 3.2002ZM12 6C10.8912 6 10 6.89124 10 8C10 9.10876 10.8912 10 12 10C13.1088 10 14 9.10876 14 8C14 6.89124 13.1088 6 12 6Z" fill="#7BC058"/>
                     </svg>
                     <span className={`mx-2 ${styles.divider}`}></span>
                     </li>
                     <li className={`text-decoration-none dropdown ${showClubs ? 'show' : null}`} ref={notifyRef}>
-                    <a href="#" className={`nav-link custom-toggle dropdown-toggle ${styl.ct}`} onClick={()=>{onMenuClick();}}>My Clubs & Leagues</a>
+                    <a href="#" className={`nav-link custom-toggle dropdown-toggle ${styl.ct}`} onClick={()=>{onMenuClick('myclubs');}}>My Clubs & Leagues</a>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_1918_67329)">
                         <path d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM17.5 18.4385L16.4375 19.501L13.25 16.3135L14.3125 15.251L17.5 18.4385ZM6.3457 6.21973C6.63868 5.92676 7.1123 5.92675 7.40527 6.21973L13.7832 12.5977C14.076 12.8906 14.0761 13.3643 13.7832 13.6572L11.6572 15.7832C11.3643 16.0761 10.8906 16.076 10.5977 15.7832L4.21973 9.40527C3.92675 9.1123 3.92676 8.63868 4.21973 8.3457L6.3457 6.21973ZM15 6C16.1046 6 17 6.89543 17 8C17 9.10457 16.1046 10 15 10C13.8954 10 13 9.10457 13 8C13 6.89543 13.8954 6 15 6Z" fill="#7BC058"/>
@@ -63,18 +72,19 @@ export default function TopHeader({clubs,sendData, onMenuClick}){
                     ))}
                     </div>
                     </li>
+                    </>}
                 </ul>
                 <ul className={`d-flex d-lg-none justify-content-between list-unstyled ${styles.custom}`}>
                     <li>
                     {/* <a href="#" className="text-decoration-none">My Account</a> */}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={()=>{if(data.userInfo.signedIn){onMenuClick('myaccount');}}}>
                         <path d="M12 1C18.072 1 23 5.928 23 12C23 18.072 18.072 23 12 23C5.928 23 1 18.072 1 12C1 5.928 5.928 1 12 1ZM12 13C9.78944 13 8.37066 13.9834 7.4502 15.2217C6.66684 16.2756 6.247 17.522 6.0752 18.5C7.64021 19.9278 9.72045 20.7998 12 20.7998C14.2793 20.7998 16.3589 19.9276 17.9238 18.5C17.752 17.5221 17.3331 16.2755 16.5498 15.2217C15.6293 13.9834 14.2106 13 12 13ZM12 3.2002C7.149 3.2002 3.2002 7.149 3.2002 12C3.2002 13.6869 3.67892 15.2639 4.50586 16.6045C4.80047 15.7483 5.2346 14.8504 5.8457 14.0283C6.74038 12.8248 8.01455 11.7928 9.74121 11.3037C8.68904 10.584 8 9.37436 8 8C8 5.78667 9.78667 4 12 4C14.2133 4 16 5.78667 16 8C16 9.37465 15.3104 10.584 14.2578 11.3037C15.9849 11.7927 17.2595 12.8246 18.1543 14.0283C18.7653 14.8503 19.1986 15.7484 19.4932 16.6045C20.3203 15.2638 20.7998 13.6871 20.7998 12C20.7998 7.149 16.851 3.2002 12 3.2002ZM12 6C10.8912 6 10 6.89124 10 8C10 9.10876 10.8912 10 12 10C13.1088 10 14 9.10876 14 8C14 6.89124 13.1088 6 12 6Z" fill="#7BC058"/>
                     </svg>
                     <span className={`mx-2 ${styles.divider}`}></span>
                     </li>
                     <li className={`text-decoration-none dropdown ${showClubs ? 'show' : null}`} ref={notifyRef}>
                     {/* <a href="#" className={`nav-link custom-toggle dropdown-toggle ${styl.ct}`} onClick={()=>{onMenuClick();}}>My Clubs & Leagues</a> */}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={()=>{onMenuClick();}}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={()=>{onMenuClick('myclubs');}}>
                         <g clip-path="url(#clip0_1918_67329)">
                         <path d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM17.5 18.4385L16.4375 19.501L13.25 16.3135L14.3125 15.251L17.5 18.4385ZM6.3457 6.21973C6.63868 5.92676 7.1123 5.92675 7.40527 6.21973L13.7832 12.5977C14.076 12.8906 14.0761 13.3643 13.7832 13.6572L11.6572 15.7832C11.3643 16.0761 10.8906 16.076 10.5977 15.7832L4.21973 9.40527C3.92675 9.1123 3.92676 8.63868 4.21973 8.3457L6.3457 6.21973ZM15 6C16.1046 6 17 6.89543 17 8C17 9.10457 16.1046 10 15 10C13.8954 10 13 9.10457 13 8C13 6.89543 13.8954 6 15 6Z" fill="#7BC058"/>
                         </g>

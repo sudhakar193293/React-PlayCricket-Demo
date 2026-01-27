@@ -29,3 +29,9 @@
 .accord{
   background-color: #066FBE;
 }
+.clubcontent:hover,
+.clubcontent:focus {
+color: #e0e0e0 !important;
+background-color: transparent !important;
+cursor: pointer;
+}

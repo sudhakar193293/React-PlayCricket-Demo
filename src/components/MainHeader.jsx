@@ -7,17 +7,21 @@ import '../../src/styles/styles.css';
 import Slider from './Slider';
 
 
-export default function MainHeader({userName,clubs}) {
-  const [selectedClub, setSelectedClub] = useState('HARLOW TOWN CC')
+export default function MainHeader({clubs, data}) {
+  const [selectedClub, setSelectedClub] = useState('')
   const [isSliderOpen, setIsSliderOpen] = useState(false);
+  const [selectedLink, setSelectedLink] = useState('')
   const handleClub = (c) => {
+    setSelectedClub(c);
+  }
+  const clubHandler = (c) => {
     setSelectedClub(c);
   }
   return (
     <>
-    <TopHeader clubs={clubs} sendData={handleClub} onMenuClick={()=> setIsSliderOpen(true)}/>
-    <Slider isOpen={isSliderOpen} onClose={()=>setIsSliderOpen(false)}/>
-    <Header userName={userName} club={selectedClub}/>
+    <TopHeader clubs={clubs} data={data} sendData={handleClub} onMenuClick={(link)=> {setSelectedLink(link);setIsSliderOpen(true)}}/>
+    <Slider isOpen={isSliderOpen} onClose={()=>setIsSliderOpen(false)} link={selectedLink} onClubSelect={clubHandler} data={data}/>
+    {selectedClub !== '' && <Header club={selectedClub}/>}
     </>
   )
 }
