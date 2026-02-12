@@ -7,7 +7,7 @@ import '../../src/styles/styles.css';
 import Slider from './Slider';
 
 
-export default function MainHeader({clubs, data}) {
+export default function MainHeader({clubs,data}) {
   const [selectedClub, setSelectedClub] = useState('')
   const [isSliderOpen, setIsSliderOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState('')
@@ -19,9 +19,9 @@ export default function MainHeader({clubs, data}) {
   }
   return (
     <>
-    <TopHeader clubs={clubs} data={data} sendData={handleClub} onMenuClick={(link)=> {setSelectedLink(link);setIsSliderOpen(true)}}/>
-    <Slider isOpen={isSliderOpen} onClose={()=>setIsSliderOpen(false)} link={selectedLink} onClubSelect={clubHandler} data={data}/>
-    {selectedClub !== '' && <Header club={selectedClub}/>}
+    <TopHeader clubs={clubs} data={data.topHeaderData} sendData={handleClub} onMenuClick={(link)=> {setSelectedLink(link);setIsSliderOpen(true)}}/>
+    <Slider isOpen={isSliderOpen} onClose={()=>setIsSliderOpen(false)} link={selectedLink} onClubSelect={clubHandler} data={data.topHeaderData}/>
+    {(selectedClub !== '' || sessionStorage.getItem('selectedClub') !== null)&& <Header club={sessionStorage.getItem('selectedClub')} data={data.headerData}/>}
     </>
   )
 }

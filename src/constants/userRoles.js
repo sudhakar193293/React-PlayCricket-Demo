@@ -1,0 +1,1 @@
+export const userRoles = ["super_admin","member_of_the_website","umpire","main_administrator","scorer","ecb_admin","team_report"]
