@@ -53,3 +53,23 @@
     display: block;
 } */
 
+@font-face {
+  font-family: 'GT-Walsheim-Black-Trial';
+  src: url('/fonts/GT-Walsheim-Black-Trial.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GT-Walsheim-Bold-Trial';
+  src: url('/fonts/GT-Walsheim-Bold-Trial.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AvenirNextLTPro-Cn';
+  src: url('/fonts/AvenirNextLTPro-Cn.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}

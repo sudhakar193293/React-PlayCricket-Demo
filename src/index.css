@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -20,12 +20,12 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
+} */
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* display: flex;
+  place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -65,4 +65,25 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@font-face {
+  font-family: 'GT-Walsheim-Black-Trial';
+  src: url('/fonts/GT-Walsheim-Black-Trial.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GT-Walsheim-Bold-Trial';
+  src: url('/fonts/GT-Walsheim-Bold-Trial.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AvenirNextLTPro-Cn';
+  src: url('/fonts/AvenirNextLTPro-Cn.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }

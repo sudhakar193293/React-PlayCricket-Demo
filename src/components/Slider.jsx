@@ -1,8 +1,12 @@
 import React,{useState,useEffect,useRef} from 'react'
 import styles from "./slider.module.css";
 import  {getLinksByRole} from '../utils/getLinksByRole'
+import {userRoles} from '../constants/userRoles'
+import { roleLinks } from '../constants/roleLinks';
+
  
 const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
+  const linksToShow = userRoles.flatMap(role => roleLinks[role] || []);
   const [menu, setMenu] = useState(null)
   const [openParents, setOpenParents] = useState([]);
   const sliderRef = useRef(null)
@@ -30,6 +34,11 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
 
   const toggleMenu = (menu) =>{
     setMenu((prev)=> (prev === menu ? null : menu))
+  }
+
+  const handleLinkClick = (path,domain) =>{
+    const linkUrl  = path.replace('annatest',domain)
+    window.location.href = linkUrl;
   }
 
   // const data = link === 'myclubs' ? 
@@ -102,16 +111,15 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
               </div>
             }
             <div>
-              {data.Clubs.map((parent) => {
-                const links = getLinksByRole('super_admin');
-                console.log("links",links);
+              {data.roles.map((parent) => {
+                let links = getLinksByRole('main_administrator');
                 return(
-                  <div key={parent.id}>
+                  <div key={parent.website.id}>
           
                     {/* Dropdown Header */}
                     <div
                       className="d-flex align-items-center justify-content-between mx-3 pt-3"
-                      onClick={() => toggleParent(parent.id)}
+                      onClick={() => toggleParent(parent.website.id)}
                     >
                       <div className="d-flex align-items-center">
                         {link === 'myclubs' ? 
@@ -121,10 +129,10 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M12 1C18.072 1 23 5.928 23 12C23 18.072 18.072 23 12 23C5.928 23 1 18.072 1 12C1 5.928 5.928 1 12 1ZM12 13C9.78944 13 8.37066 13.9834 7.4502 15.2217C6.66684 16.2756 6.247 17.522 6.0752 18.5C7.64021 19.9278 9.72045 20.7998 12 20.7998C14.2793 20.7998 16.3589 19.9276 17.9238 18.5C17.752 17.5221 17.3331 16.2755 16.5498 15.2217C15.6293 13.9834 14.2106 13 12 13ZM12 3.2002C7.149 3.2002 3.2002 7.149 3.2002 12C3.2002 13.6869 3.67892 15.2639 4.50586 16.6045C4.80047 15.7483 5.2346 14.8504 5.8457 14.0283C6.74038 12.8248 8.01455 11.7928 9.74121 11.3037C8.68904 10.584 8 9.37436 8 8C8 5.78667 9.78667 4 12 4C14.2133 4 16 5.78667 16 8C16 9.37465 15.3104 10.584 14.2578 11.3037C15.9849 11.7927 17.2595 12.8246 18.1543 14.0283C18.7653 14.8503 19.1986 15.7484 19.4932 16.6045C20.3203 15.2638 20.7998 13.6871 20.7998 12C20.7998 7.149 16.851 3.2002 12 3.2002ZM12 6C10.8912 6 10 6.89124 10 8C10 9.10876 10.8912 10 12 10C13.1088 10 14 9.10876 14 8C14 6.89124 13.1088 6 12 6Z" fill="#FFFFFF"/>
                         </svg>}
-                        <span className="ml-2 slider-name text-white font-weight-bold">{parent.name}</span>
+                        <span className="ml-2 slider-name text-white font-weight-bold">{parent.website.name}</span>
                       </div>
                       <span className={`slider-arrow ${open ? "open" : ""}`}>
-                        <svg width="16" height="16"  className={`arrow ${(openParents.includes(parent.id)) ? 'rotate' : ''}`}  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="16" height="16"  className={`arrow ${(openParents.includes(parent.website.id)) ? 'rotate' : ''}`}  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M6.79492 18.885L13.5938 12L6.79492 5.115L8.88804 3L17.7949 12L8.88804 21L6.79492 18.885Z" fill="#FFFFFF"/>
                         </svg>
                       </span>
@@ -142,16 +150,29 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
                     ))}
                       </ul>
                     )} */}
-                    {openParents.includes(parent.id) && (
-                      <ul className="list-unstyled m-0 p-0">
-                        {links.map((link)=>(
-                            <li className={`dropdown-item ml-4 text-white ${styles.clubcontent}`} onClick={()=>{if(link.label === 'Manage Club'){onClubSelect(parent.name);onClose();} else{window.location.href=`${link.url}`}}}>
+                    {openParents.includes(parent.website.id) && ( ()=>
+                      {
+                        // let user = data.UserRoles.filter(u => {if(u.website.id === parent.id){return u}})
+                        // links = getLinksByRole(user[0]?.role?.name);
+                        const roles = parent.roles.map(role => role.name)
+                        const linksToShow = roles.flatMap(role => roleLinks[role] || []);
+                        const uniqueLinks = linksToShow.filter((link,index,array) => index === array.findIndex(l =>l.label === link.label))
+                        return(<ul className="list-unstyled m-0 p-0">
+                          {parent.hasAdminAccess ?                               
+                            <li className={`dropdown-item ml-4 text-white ${styles.clubcontent}`} onClick={()=>{onClubSelect(parent.website.name);sessionStorage.setItem('selectedClub',parent.website.name);onClose();}}>
                               <span>- </span>
-                              {link.label}
-                            </li>
-                        ))}
-                      </ul>
-                    )}
+                              Manage Club
+                            </li>: null}
+                          {uniqueLinks.map((link)=>(
+                              <li className={`dropdown-item ml-4 text-white ${styles.clubcontent}`} onClick={()=>{if(link.label === 'Manage Club'){onClubSelect(parent.name);sessionStorage.setItem('selectedClub',parent.name);onClose();} else{handleLinkClick(link.path,parent.website.subdomain)}}}>
+                                <span>- </span>
+                                {link.label}
+                              </li>
+                          ))}
+                        </ul>
+                        )
+                      }
+                    )()}
                   </div>
               )})}
             </div>
@@ -165,21 +186,21 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
           }
           <div
             className="d-flex align-items-center justify-content-between mx-3 pt-3"
-            onClick={() => toggleParent(data.userInfo.id)}
+            onClick={() => toggleParent(data.user.id)}
           >
             <div className="d-flex align-items-center">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 1C18.072 1 23 5.928 23 12C23 18.072 18.072 23 12 23C5.928 23 1 18.072 1 12C1 5.928 5.928 1 12 1ZM12 13C9.78944 13 8.37066 13.9834 7.4502 15.2217C6.66684 16.2756 6.247 17.522 6.0752 18.5C7.64021 19.9278 9.72045 20.7998 12 20.7998C14.2793 20.7998 16.3589 19.9276 17.9238 18.5C17.752 17.5221 17.3331 16.2755 16.5498 15.2217C15.6293 13.9834 14.2106 13 12 13ZM12 3.2002C7.149 3.2002 3.2002 7.149 3.2002 12C3.2002 13.6869 3.67892 15.2639 4.50586 16.6045C4.80047 15.7483 5.2346 14.8504 5.8457 14.0283C6.74038 12.8248 8.01455 11.7928 9.74121 11.3037C8.68904 10.584 8 9.37436 8 8C8 5.78667 9.78667 4 12 4C14.2133 4 16 5.78667 16 8C16 9.37465 15.3104 10.584 14.2578 11.3037C15.9849 11.7927 17.2595 12.8246 18.1543 14.0283C18.7653 14.8503 19.1986 15.7484 19.4932 16.6045C20.3203 15.2638 20.7998 13.6871 20.7998 12C20.7998 7.149 16.851 3.2002 12 3.2002ZM12 6C10.8912 6 10 6.89124 10 8C10 9.10876 10.8912 10 12 10C13.1088 10 14 9.10876 14 8C14 6.89124 13.1088 6 12 6Z" fill="#FFFFFF"/>
               </svg>
-              <span className="ml-2 slider-name text-white font-weight-bold">{data.userInfo.userName}</span>
+              <span className="ml-2 slider-name text-white font-weight-bold">{data.user.userName}</span>
             </div>
             <span className={`slider-arrow ${open ? "open" : ""}`}>
-              <svg width="16" height="16"  className={`arrow ${(openParents.includes(data.userInfo.id)) ? 'rotate' : ''}`}  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="16" height="16"  className={`arrow ${(openParents.includes(data.user.id)) ? 'rotate' : ''}`}  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6.79492 18.885L13.5938 12L6.79492 5.115L8.88804 3L17.7949 12L8.88804 21L6.79492 18.885Z" fill="#FFFFFF"/>
               </svg>
             </span>
           </div>
-          {openParents.includes(data.userInfo.id) && (
+          {openParents.includes(data.user.id) && (
             <ul className="list-unstyled m-0 p-0">
               <li className={`dropdown-item ml-4 text-white ${styles.clubcontent}`}>
                 <span className='fs-6'>- My Stats</span>
@@ -201,7 +222,7 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
               </li>
             </ul>
           )}
-          {data.userInfo.childUsers.map((childParent)=>(
+          {data.user.childUsers.map((childParent)=>(
             <div key={childParent.id}>
     
               {/* Dropdown Header */}
@@ -211,7 +232,7 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
               >
                 <div className="d-flex align-items-center">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 1C18.072 1 23 5.928 23 12C23 18.072 18.072 23 12 23C5.928 23 1 18.072 1 12C1 5.928 5.928 1 12 1ZM12 13C9.78944 13 8.37066 13.9834 7.4502 15.2217C6.66684 16.2756 6.247 17.522 6.0752 18.5C7.64021 19.9278 9.72045 20.7998 12 20.7998C14.2793 20.7998 16.3589 19.9276 17.9238 18.5C17.752 17.5221 17.3331 16.2755 16.5498 15.2217C15.6293 13.9834 14.2106 13 12 13ZM12 3.2002C7.149 3.2002 3.2002 7.149 3.2002 12C3.2002 13.6869 3.67892 15.2639 4.50586 16.6045C4.80047 15.7483 5.2346 14.8504 5.8457 14.0283C6.74038 12.8248 8.01455 11.7928 9.74121 11.3037C8.68904 10.584 8 9.37436 8 8C8 5.78667 9.78667 4 12 4C14.2133 4 16 5.78667 16 8C16 9.37465 15.3104 10.584 14.2578 11.3037C15.9849 11.7927 17.2595 12.8246 18.1543 14.0283C18.7653 14.8503 19.1986 15.7484 19.4932 16.6045C20.3203 15.2638 20.7998 13.6871 20.7998 12C20.7998 7.149 16.851 3.2002 12 3.2002ZM12 6C10.8912 6 10 6.89124 10 8C10 9.10876 10.8912 10 12 10C13.1088 10 14 9.10876 14 8C14 6.89124 13.1088 6 12 6Z" fill="#FFFFFF"/>
+                    <path d="M12 1C18.072 1 23 5.928 23 12C23 18.072 18.072 23 12 23C5.928 23 1 18.072 1 12C1 5.928 5.928 1 12 1ZM9 14C7.4645 14 6.38915 14.4704 5.68457 15.1133C5.17285 15.5803 4.82298 16.1688 4.6377 16.8115C6.2114 19.2108 8.92359 20.7998 12 20.7998C12.6768 20.7998 13.3353 20.7197 13.9688 20.5742C13.8889 19.3531 13.8198 17.8408 13.2568 16.5156C12.9493 15.7918 12.5109 15.1821 11.876 14.7471C11.2438 14.3139 10.3378 14 9 14ZM16.9072 14.7656C16.8398 14.7797 16.7529 14.8023 16.6523 14.8359C16.4498 14.9037 16.2143 15.0063 15.9932 15.1406C15.5189 15.4288 15.2727 15.7547 15.2471 16.0625L15.2266 16.0605C15.7152 17.3748 15.8564 18.8049 15.9277 19.8701C17.4392 19.1124 18.7028 17.9332 19.5645 16.4863C19.4794 16.1981 19.3622 15.9216 19.1934 15.6797C18.8549 15.1949 18.2504 14.75 17 14.75C16.9926 14.7507 16.9628 14.754 16.9072 14.7656ZM12 3.2002C7.149 3.2002 3.2002 7.149 3.2002 12C3.2002 12.8697 3.32913 13.7098 3.56543 14.5039C3.78757 14.1949 4.04364 13.9035 4.33594 13.6367C4.98919 13.0406 5.79727 12.5843 6.74609 12.3066C5.69128 11.5873 5 10.3764 5 9C5 6.78667 6.78667 5 9 5C11.2133 5 13 6.78667 13 9C13 10.3686 12.3162 11.5732 11.2715 12.2939C11.9252 12.4801 12.5019 12.7507 13.0068 13.0967C13.5895 13.4959 14.0481 13.9795 14.415 14.502C14.6647 14.232 14.9516 14.0194 15.2148 13.8594C15.4722 13.703 15.7365 13.5785 15.9814 13.4844C15.3853 13.028 15 12.3109 15 11.5C15 10.1167 16.1167 9 17.5 9C18.8833 9 20 10.1167 20 11.5C20 12.3736 19.5535 13.1391 18.877 13.5859C19.5139 13.8479 20.0001 14.2494 20.3613 14.7363C20.6442 13.8744 20.7998 12.9551 20.7998 12C20.7998 7.149 16.851 3.2002 12 3.2002ZM17.5 10.5C16.9451 10.5 16.5 10.9451 16.5 11.5C16.5 12.0549 16.9451 12.5 17.5 12.5C18.0549 12.5 18.5 12.0549 18.5 11.5C18.5 10.9451 18.0549 10.5 17.5 10.5ZM9 7C7.89124 7 7 7.89124 7 9C7 10.1088 7.89124 11 9 11C10.1088 11 11 10.1088 11 9C11 7.89124 10.1088 7 9 7Z" fill="#FFFFFF"/>
                   </svg>
                   <span className="ml-2 slider-name text-white font-weight-bold">{childParent.userName}</span>
                 </div>
@@ -250,12 +271,12 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
             </svg>
             <span className="ml-2 slider-name text-white font-weight-bold">Help Center</span>
           </div>
-          <div className="d-flex align-items-center py-2">
+          {/* <div className="d-flex align-items-center py-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6.99 11L3 15L6.99 19V16H14V14H6.99V11ZM21 9L17.01 5V8H10V10H17.01V13L21 9Z" fill="#FFFFFF"/>
             </svg>
             <span className="ml-2 slider-name text-white font-weight-bold">Switch user</span>
-          </div>
+          </div> */}
           <div className="d-flex align-items-center py-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" fill="#FFFFFF"/>

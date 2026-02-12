@@ -1,27 +1,108 @@
 import MainHeader from './components/MainHeader.jsx'
 function App() {
-  const data = 
-{
-    Clubs:
-    [
-        { subdomain: "wanderers", name: "The Wanderers CC", id: 6303, clubLinks: [{ id: 1, name: 'ManageClub', path: "/manageClub", enable: true }, { id: 2, name: 'CustomiseClubWebsite', path: "/CustomiseClubWebsite", enable: true }] },
-        { subdomain: "saffronwalden", name: "Saffron Walden CC", id: 5476, clubLinks: [{ id: 1, name: 'ManageClub', path: "/manageClub", enable: true }, { id: 2, name: 'CustomiseClubWebsite', path: "/CustomiseClubWebsite", enable: false }] }
-    ],
-
-    UserRoles:
-    [
+  localStorage.setItem('role','admin');
+const data={
+  topHeaderData: {   
+    user: {
+      id: 1,
+      userName: "Srikanth",
+      signedIn: true,
+      childUsers: [
         {
-            id: 1, clubid: 6303, role: { id: 1, name: 'main_adminstrator' }, permissions: [{ header: { id: 1, name: 'day_to_day', enable: true }, subHeader: [{ id: 1, parentId: 1, name: 'manage Fixture', enable: true, path: "/managefixture" }, { id: 2, name: 'Confirm Results', enable: true, path: "/confirmresults" }] }, { header: { id: 2, name: 'Action Center', enable: true }, subHeader: null }]
-        },
-        {
-            id: 2, clubid: 5476, role: { id: 2, name: 'member_of_the_website' }, permissions: [{ header: { id: 1, name: 'day_to_day', enable: false }, subHeader: [{ id: 1, parentId: 1, name: 'manage Fixture', enable: true, path: "/managefixture" }, { id: 2, name: 'Confirm Results', enable: true, path: "/confirmresults" }] }, { header: { id: 2, name: 'Action Center', enable: true }, subHeader: null }]
+          id: 101,
+          userName: "Ram"
         }
+      ]
+    },
+    roles: [
+      {
+        website: {
+          id: 1,
+          name: "The Wanderers CC",
+          subdomain: "wanderers"
+        },
+        hasAdminAccess : false, 
+        roles: [
+          {
+            id: 81,
+            name: "scorer"
+          },
+          {
+            id: 98,
+            name: "umpire"
+          }
+        ]
+      },
+      {
+        website: {
+          id: 31,
+          name: "The Forty Club",
+          subdomain: "thefortyclub"
+        },
+        hasAdminAccess: true,
+        roles: [
+          {
+            id: 42,
+            name: "main_administrator"
+          }
+        ]
+      }
     ],
-    userInfo: { signedIn:true, id:101, userName: 'Srikanth', childUsers: [{ id:201, userName: "child1" }] }
+  },
+  headerData: {
+    website: {
+      id: 31,
+      name: "The Forty Club",
+      subdomain: "thefortyclub",
+      badge: "/thefortyclub"
+    },
+    roles: [
+      {
+        id: 49,
+        name: "random",
+        isCustom: true,
+        permissions: {
+          day_to_day: {
+          fixtures: true,
+          results: true,
+          emails: true,
+          members: true,
+          league: true,
+          find_a: true,
+          bookings: true
+          },
+          site_management: {
+            about_us: true,
+            gallery: true,
+            information_board: true,
+            site_builder: true,
+            website_configuration: true
+          },
+          setup: {
+            administrator_roles: true,
+            messaging_groups: true,
+            privacy_notices: true,
+            scoring_rules: true,
+            teams: true
+          },
+          report_download: {
+            ground_usage: true,
+            matches: true,
+            club_registered_players: true,
+            website_statistics:true
+          },
+          upload: {
+            badge: true,
+            members_upload: true
+          }
+        } 
+      }
+    ]
+  }
 }
   return (
     <>
-      <MainHeader data={data}/>
+      <MainHeader data={data || null}/>
     </>
   )
 }
