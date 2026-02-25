@@ -8,7 +8,7 @@
     gap: 6px;
 }
 .custom >li>a{
-    color: #3B4954;
+    /* color: #3B4954; */
     text-decoration: none;
     font-family: AvenirNextLTPro-Cn;
     font-weight: 400;
@@ -27,4 +27,18 @@
     height: 20px;
     background-color: #7BC058;
     margin: 0 20px;
+}
+.topLink>a{
+    color: #3B4954 ;
+}
+.topLink>svg{
+    color: #7BC058;
+    cursor: pointer;
+}
+.topLink:hover  a,
+.topLink:hover svg,
+.topLink.active svg,
+.topLink.active a
+{
+    color: #0B416A;
 }

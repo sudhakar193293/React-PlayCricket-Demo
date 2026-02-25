@@ -24,6 +24,7 @@ import { createRoot } from "react-dom/client";
 import MainHeader from "./MainHeader";
 import '../styles/styles.css';
  
+const roots = {};
 // Mount function
 function renderHeader(elementId, props = {}) {
   const container = document.getElementById(elementId);
@@ -34,6 +35,12 @@ function renderHeader(elementId, props = {}) {
  
   const root = createRoot(container);
   root.render(<MainHeader {...props} />);
+  // if (!roots[elementId]) {
+  //   roots[elementId] = createRoot(container);
+  // }
+  // roots[elementId].render(
+  //   React.createElement(MainHeader, props)
+  // );
 }
  
 // Expose to window (VERY IMPORTANT)
