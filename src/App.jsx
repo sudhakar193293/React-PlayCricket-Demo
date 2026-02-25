@@ -1,6 +1,5 @@
 import MainHeader from './components/MainHeader.jsx'
 function App() {
-  localStorage.setItem('role','admin');
 const data={
   topHeaderData: {   
     user: {
