@@ -14,8 +14,10 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
   let clubDomain = ''
   if((window.location.hostname !== 'localhost') && (!window.location.hostname.includes('www.'))){
     const urlData = window.location.hostname.split('.')
-    if((new URL(urlData[0])?.hostname !== 'play-cricket-staging') && (new URL(urlData[0])?.hostname !== 'play-cricket')){
-      clubDomain = new URL(urlData[0])?.hostname;
+    if(urlData[0]){
+      if((new URL(urlData[0])?.hostname !== 'play-cricket-staging') && (new URL(urlData[0])?.hostname !== 'play-cricket')){
+        clubDomain = new URL(urlData[0])?.hostname;
+      }
     }
   }
   useEffect(()=>{
