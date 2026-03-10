@@ -1,6 +1,6 @@
 import MainHeader from './components/MainHeader.jsx'
 function App() {
-console.log("version>>>> v1.0.1");
+console.log("version>>>> v1.0.2");
 const data={
   topHeaderData: {   
     user: {
@@ -59,8 +59,8 @@ const data={
     roles: [
       {
         id: 49,
-        name: "random",
-        isCustom: true,
+        name: "ecb_admin",
+        isCustom: false,
         permissions: {
           day_to_day: {
           fixtures: true,

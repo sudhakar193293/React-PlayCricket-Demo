@@ -15,8 +15,9 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
   if((window.location.hostname !== 'localhost') && (!window.location.hostname.includes('www.'))){
     const urlData = window.location.hostname.split('.')
     if(urlData[0]){
-      if((new URL(urlData[0])?.hostname !== 'play-cricket-staging') && (new URL(urlData[0])?.hostname !== 'play-cricket')){
-        clubDomain = new URL(urlData[0])?.hostname;
+      if((urlData[0] !== 'play-cricket-staging') && (urlData[0] !== 'play-cricket')){
+        clubDomain = urlData[0];
+        
       }
     }
   }

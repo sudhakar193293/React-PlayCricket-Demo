@@ -1,6 +1,6 @@
 .container{
     background-color: rgb(240, 242, 247);
-    padding: 7px 25px 5px 25px;
+    padding: 7px 24px 5px 24px !important;
     height: 60px;
     width: 100%;
     gap: 10px;
@@ -11,7 +11,6 @@
     width: auto;
     height: 40px;
     gap: 8px;
-    padding-bottom: 9px;
     /* border-bottom: 7px; */
 }
 .logoContainer>img{
@@ -33,6 +32,9 @@
 .header-links{
     display: flex;
     justify-content: space-between;
+}
+.header-links > li{
+    margin-left: 2px;
 }
 .header-links > li:not(:last-child) > a {
     font-family: 'GT-Walsheim-Bold-Trial';
@@ -99,7 +101,7 @@
     display: inline-block;
     width: 2px;
     height: 28px;
-    margin-top: 1%;
+    margin-top: 1.6%;
     background-color: #7BC058;
 }
 .cursor{

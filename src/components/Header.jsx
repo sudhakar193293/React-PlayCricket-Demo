@@ -4,9 +4,10 @@ import style from './topHeader.module.css';
 import headerlogo from '../assets/Cricket Club Logo.png';
 import arrow from '../assets/arrow right 24px.png';
 import './header.css';
+import { getPermissions } from '../utils/getPermissions';
 
 export default function Header( {club,data}) {
-  const permissions = data?.roles?.[0]?.permissions || {}
+  const permissions = (data.roles[0].isCustom === false) && (data.roles[0].name === 'super_admin' || data.roles[0].name === 'main_administrator' || data.roles[0].name === 'ecb_admin') ? getPermissions() : data?.roles?.[0]?.permissions
   const [showClubInfo, setShowClubInfo] = useState(false);
   const [showUpdateClub, setShowUpdateClub] = useState(false)
   const [openmenu, setOpenMenu] =  useState(null);
@@ -106,7 +107,7 @@ export default function Header( {club,data}) {
 
   return (
     <nav className={`navbar navbar-expand-lg navbar-light border-bottom ${styles.container}`} ref={headerRef}>
-      <div className={`navbar-brand d-none d-lg-flex align-items-center ${styles.logoContainer}`}>
+      <div className={`d-none d-lg-flex align-items-center ${styles.logoContainer}`}>
         <img src={headerlogo} alt="logo"/>
         <span className='text-nowrap'>{data?.website?.name}</span>
       </div>
@@ -114,9 +115,9 @@ export default function Header( {club,data}) {
         <div className='navbar-toggler' type="button" data-toggle="collapse" data-target="#mainNavbar" style={{marginRight:"20%"}}>
           <span className='navbar-toggler-icon'></span>
         </div>
-        <div className='text-nowrap' style={{fontFamily:'GT Walsheim Trial',fontWeight:800,fontSize:'20px',color:'#0B416A',lineHeight:'100%', marginRight:'10px'}}>{club}</div>
+        <div className='text-nowrap' style={{fontFamily:'GT Walsheim Trial',fontWeight:800,fontSize:'20px',color:'#0B416A',lineHeight:'100%', marginRight:'10px'}}>{data?.website?.name}</div>
       </div>
-      <div className='collapse navbar-collapse' id="mainNavbar" style={{flexGrow:'0'}}>
+      <div className='collapse navbar-collapse' id="mainNavbar" style={{flexGrow:'0',marginLeft:'auto',paddingRight:"0px"}}>
         <ul className={`navbar-nav ${styles["header-links"]} ${styles.headerNav}`}>
           <li className={`nav-item text-nowrap`}><a className={`nav-link ${styles.cursor} ${activeLink === 'action center' ? 'active' : ''}`} onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/home',data?.website?.subdomain,'action center')}>ACTION CENTER</a></li>
           {!(permissions?.day_to_day?.fixtures === false && permissions?.day_to_day?.find_a === false && permissions?.setup?.scoring_rules === false && permissions?.day_to_day?.results === false) &&
@@ -223,13 +224,19 @@ export default function Header( {club,data}) {
                 </a>
                 {openSubMenu === 'configure-club' && (
                 <ul className='list-unstyled m-0 p-0'>
-                  <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/home_page',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Homepage</a></li>
-                  <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/docs_config',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Documents</a></li>
-                  <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/fixtures',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Fixture & results</a></li>
-                  <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/menu_configs',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Menu</a></li>
-                  <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/custom_pages',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Page builder</a></li>
-                  <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/statistics',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Statistics</a></li>
-                  <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/badge',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Badge</a></li>
+                  {permissions?.site_management?.website_configuration &&
+                    <>
+                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/home_page',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Homepage</a></li>
+                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/docs_config',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Documents</a></li>
+                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/fixtures',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Fixture & results</a></li>
+                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/menu_configs',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Menu</a></li>
+                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/custom_pages',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Page builder</a></li>
+                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/statistics',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Statistics</a></li>
+                    </>
+                  }
+                  {permissions?.upload?.badge &&
+                    <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/website_configurations/badge',data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Badge</a></li>
+                  }
                 </ul>
                 )}
               </li>
@@ -310,24 +317,28 @@ export default function Header( {club,data}) {
               {permissions?.report_download?.website_statistics &&
                 <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/web_page_reports',data?.website?.subdomain)}>Website statistics</a></li>
               }
+              {permissions?.report_download?.ground_usage &&
+                <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/ground_usage_reports',data?.website?.subdomain)}>Ground usage</a></li>
+              }
               {permissions?.report_download?.matches &&
                 <>
-                  <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/ground_usage_reports',data?.website?.subdomain)}>Ground usage</a></li>
                   <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/player_turnouts/fixtures',data?.website?.subdomain)}>Player turnout</a></li>
                   <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/scoring_method_reports',data?.website?.subdomain)}>Scoring methods</a></li>
                   <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/stats_download',data?.website?.subdomain)}>Stats download</a></li>
                 </>
               }
+              {permissions?.day_to_day?.members &&
+                <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/player_nominations/removed_registrations_report',data?.website?.subdomain)}>Removed Registrations</a></li>
+              }
               {permissions?.report_download?.club_registered_players &&
                 <>
                   <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/registered_players',data?.website?.subdomain)}>Current Players</a></li>
-                  <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/player_nominations/removed_registrations_report',data?.website?.subdomain)}>Remove Registrations</a></li>
                   <li><a className="dropdown-item" onClick={()=>handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/club_player_suspensions/report',data?.website?.subdomain)}>Suspensions</a></li>
                 </>
               }   
             </ul>
           </li>
-          <span className={`d-none d-lg-flex mx-2 ${styles.divider}`}></span>
+          <span className={`nav-item d-none d-lg-flex mx-2 ${styles.divider}`}></span>
           <li className={`nav-item text-nowrap ${styles.exit_Admin}`}><a className='nav-link' onClick={()=>{onAdminExit()}}>EXIT ADMIN</a></li>
         </ul>
       </div>

@@ -8,9 +8,9 @@ import Slider from './Slider';
 
 
 export default function MainHeader({clubs,data}) {
-  const [selectedClub, setSelectedClub] = useState('')
+  const [selectedClub, setSelectedClub] = useState('');
   const [isSliderOpen, setIsSliderOpen] = useState(false);
-  const [selectedLink, setSelectedLink] = useState('')
+  const [selectedLink, setSelectedLink] = useState('');
   const handleClub = (c) => {
     setSelectedClub(c);
   }
