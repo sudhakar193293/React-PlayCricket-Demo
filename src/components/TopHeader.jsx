@@ -3,6 +3,7 @@ import styles from './topHeader.module.css';
 import logo from '../assets/PC Admin logo_primary.png';
 import pclogo from '../assets/PC logo.png';
 import styl from './header.module.css';
+import { BASE_HOST } from '../utils/getHostName'; 
 
 export default function TopHeader({clubs,sendData, onMenuClick, data}){
     const [showClubs, setShowClubs] = useState(false);
@@ -24,7 +25,7 @@ export default function TopHeader({clubs,sendData, onMenuClick, data}){
     return(
       <div className={`bg-white d-flex align-items-center justify-content-between ${styles.container}`}>
         <div className="d-flex align-items-center">
-          {!window?.location?.href.includes('site_admin') ? <a href="https://www.play-cricket-staging.com/"><img src={pclogo} alt="logo" width="150px" height="33px" className="mr-2"/></a> : <a href="https://www.play-cricket-staging.com/"><img src={logo} alt="logo" width="150px" height="33px" className="mr-2"/></a>}
+          {!window?.location?.href.includes('site_admin') ? <a href={`https://www.${BASE_HOST}/`}><img src={pclogo} alt="logo" width="150px" height="33px" className="mr-2"/></a> : <a href={`https://www.${BASE_HOST}/`}><img src={logo} alt="logo" width="150px" height="33px" className="mr-2"/></a>}
         </div>
         <div className='align-items-center'>
           <ul className={`m-0 d-none d-lg-flex justify-content-between align-items-center list-unstyled ${styles.custom}`}>
@@ -44,7 +45,7 @@ export default function TopHeader({clubs,sendData, onMenuClick, data}){
             <span className={`${styles.divider}`}></span>
             {data?.user?.signedIn === false ? 
             <li className={`${styles.topLink}`} ref={notifyRef}>
-              <a href="https://www.play-cricket-staging.com/users/sign_in" className="text-decoration-none">Sign In</a>
+              <a href={`https://www.${Base_Host}/users/sign_in`} className="text-decoration-none">Sign In</a>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 1C18.072 1 23 5.928 23 12C23 18.072 18.072 23 12 23C5.928 23 1 18.072 1 12C1 5.928 5.928 1 12 1ZM12 13C9.78944 13 8.37066 13.9834 7.4502 15.2217C6.66684 16.2756 6.247 17.522 6.0752 18.5C7.64021 19.9278 9.72045 20.7998 12 20.7998C14.2793 20.7998 16.3589 19.9276 17.9238 18.5C17.752 17.5221 17.3331 16.2755 16.5498 15.2217C15.6293 13.9834 14.2106 13 12 13ZM12 3.2002C7.149 3.2002 3.2002 7.149 3.2002 12C3.2002 13.6869 3.67892 15.2639 4.50586 16.6045C4.80047 15.7483 5.2346 14.8504 5.8457 14.0283C6.74038 12.8248 8.01455 11.7928 9.74121 11.3037C8.68904 10.584 8 9.37436 8 8C8 5.78667 9.78667 4 12 4C14.2133 4 16 5.78667 16 8C16 9.37465 15.3104 10.584 14.2578 11.3037C15.9849 11.7927 17.2595 12.8246 18.1543 14.0283C18.7653 14.8503 19.1986 15.7484 19.4932 16.6045C20.3203 15.2638 20.7998 13.6871 20.7998 12C20.7998 7.149 16.851 3.2002 12 3.2002ZM12 6C10.8912 6 10 6.89124 10 8C10 9.10876 10.8912 10 12 10C13.1088 10 14 9.10876 14 8C14 6.89124 13.1088 6 12 6Z" fill="currentColor"/>
               </svg>
@@ -79,7 +80,7 @@ export default function TopHeader({clubs,sendData, onMenuClick, data}){
           </ul>
           <ul className={`m-0 d-flex d-lg-none justify-content-between list-unstyled ${styles.custom}`}>
             {data?.user?.signedIn === false ? 
-              <li className={`${styles.topLink}`} ref={notifyRef} onClick={()=>{window.location.href = 'https://www.play-cricket-staging.com/users/sign_in'}}>
+              <li className={`${styles.topLink}`} ref={notifyRef} onClick={()=>{window.location.href = `https://www.${BASE_HOST}/users/sign_in`}}>
                 <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M28.8 4.59276H16V1.3335H28.8C30.56 1.3335 32 2.80016 32 4.59276V27.4076C32 29.2002 30.56 30.6668 28.8 30.6668H16V27.4076H28.8V4.59276Z" fill="#7BC058"/>
                 <path d="M12.2886 10.256L14.5714 8L22.6667 16L14.5714 24L12.2886 21.728L16.4657 17.6H0V14.4H8.23286H16.4657L12.2886 10.256Z" fill="#7BC058"/>

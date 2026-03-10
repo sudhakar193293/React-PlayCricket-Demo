@@ -3,6 +3,7 @@ import styles from "./slider.module.css";
 import  {getLinksByRole} from '../utils/getLinksByRole'
 import {userRoles} from '../constants/userRoles'
 import { roleLinks } from '../constants/roleLinks';
+import { BASE_HOST } from '../utils/getHostName'; 
 
  
 const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
@@ -108,12 +109,12 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
                         return(<ul className="list-unstyled m-0 p-0">
                           {parent.hasAdminAccess ?                               
                             <li className={`text-white ${styles.clubcontent}`}>
-                              <a onClick={()=>{handleLinkClick('https://annatest.play-cricket-staging.com/site_admin/home',parent.website.subdomain)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Manage Club</span></a>
+                              <a onClick={()=>{handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/home`,parent.website.subdomain)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Manage Club</span></a>
                             </li>: null
                           }
                           {uniqueLinks.map((link,index)=>(
                             <li key={index} className={`text-white ${styles.clubcontent}`}>
-                              <a onClick={()=>{if(link.label === 'Manage Club'){handleLinkClick('https://annatest.play-cricket-staging.com.com/site_admin/home',parent.website.subdomain)} else{handleLinkClick(link.path,parent.website.subdomain)}}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>{link.label}</span></a>
+                              <a onClick={()=>{if(link.label === 'Manage Club'){handleLinkClick(`https://annatest.${BASE_HOST}.com.com/site_admin/home`,parent.website.subdomain)} else{handleLinkClick(link.path,parent.website.subdomain)}}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>{link.label}</span></a>
                             </li>
                           ))}
                         </ul>
@@ -150,22 +151,22 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
           {openParents.includes(data?.user?.id) && (
             <ul className="list-unstyled m-0 p-0">
               <li className={`text-white ${styles.clubcontent}`}>
-                <a onClick={()=>{handleUserLinkClick(`https://annatest.play-cricket-staging.com/player_stats/batting/${data.user.id}?rule_type_id=179`,`https://www.play-cricket-staging.com/player_stats/batting/${data.user.id}?rule_type_id=179`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>My Stats</span></a>
+                <a onClick={()=>{handleUserLinkClick(`https://annates.${BASE_HOST}.com/player_stats/batting/${data.user.id}?rule_type_id=179`,`https://www.${BASE_HOST}/player_stats/batting/${data.user.id}?rule_type_id=179`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>My Stats</span></a>
               </li>
               <li className={`text-white ${styles.clubcontent}`}>
-                <a onClick={()=>{window.location.href = `https://myaccount.play-cricket-staging.com/profile-management/?id_token=eyJraWQiOiJoNGJTckxybHFYdkRjWWtvZGpuOVFLLXBHRjREalJXNDBzWmtEQW1Ncl9NIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVpajY5cjl2OEhmSjZXTzBpNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5lY2IuY28udWsiLCJhdWQiOiIwb2E3NnltbDkybnFXQjdhcTBpNyIsImlhdCI6MTc3MTQ5Njk2OCwiZXhwIjoxNzcxNTAwNTY4LCJqdGkiOiJJRC5CUVNWOXhpVHcxTmlCczVoVlJhOEQ4Yll1UDFjUk5pZlNwYzlxalE5STJRIiwiYW1yIjpbInB3ZCJdLCJpZHAiOiIwb2E3enY3aTdjQnBpNDNBaDBpNyIsIm5vbmNlIjoiWXNHNzZqbyIsImF1dGhfdGltZSI6MTc3MTQ5NjkyNSwiYXRfaGFzaCI6ImdsV3hya0g0bDU1eTBWRUxPSXVwcncifQ.QVgaf3OCWz4sUnfmiII-eeZ4kEd0Ag5CQNO6EQZV_bv_0RjtELrGZhtepH_6L6vCqs-4rPcXwlhSNgmKeeXl6KUk3SY6k3wdTOfsOWlyV10Bt79laoOF2DOM7ATcJur2B8nsOVhp15Ucyh-4Mp4hNFHaVF_VOcPQd5wwsan1ME_7HO5M_677-QcAo_pps5N3Eea8yxckCNQOI-nXESO7pV4Twr6mWmxVrFz8tX_iaE-Jmk3gEou28w2NfShiIO4wZxFOEO_yCie7wCaB5eW1OElb4yBBqG4fzvxMRFGc4r-ptgIHO6dD9X7lB8KHMYbXO8mcq5EWsIKVnz6ZQcKO_w&access_token=eyJraWQiOiJoNGJTckxybHFYdkRjWWtvZGpuOVFLLXBHRjREalJXNDBzWmtEQW1Ncl9NIiwidHlwIjoiYXBwbGljYXRpb24vb2t0YS1pbnRlcm5hbC1hdCtqd3QiLCJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjhGaTVOeG5HRmZCWHlHcFVtYi0zQ2dDUk16dkdqbV85VFBxWWdOU3k2UmciLCJpc3MiOiJodHRwczovL2xvZ2luLmVjYi5jby51ayIsImF1ZCI6Imh0dHBzOi8vbG9naW4uZWNiLmNvLnVrIiwic3ViIjoiU3Jpa2FudGguRGFtYWNoYXJsYUBlY2IuY28udWsiLCJpYXQiOjE3NzE0OTY5NjgsImV4cCI6MTc3MTUwMDU2OCwiY2lkIjoiMG9hNzZ5bWw5Mm5xV0I3YXEwaTciLCJ1aWQiOiIwMHVpajY5cjl2OEhmSjZXTzBpNyIsInNjcCI6WyJvcGVuaWQiLCJva3RhLnVzZXJzLm1hbmFnZS5zZWxmIiwib2t0YS51c2Vycy5yZWFkLnNlbGYiXSwiYXV0aF90aW1lIjoxNzcxNDk2OTI1fQ.Q95qY-uifWt98MnQSdTefMtdSBSc5vT7CTwACdqT0fEkvC02hrIfK2EbNPA-oPw2XDXSUT26FPdiPN82hZwxS9_Ni-xPDhi2y3iuWmQI3nIgCFyRfNWJChxW3e5P5Q9ju74WAF_ps8xZ_gO_eUCOfIa6okqseuVHIwSsLhfP1PWh8HmgAhriZ3pLI24A_XXsdRknNYtttSeLxQ6cZ9lCBB5xXL3Jmm7vsnWx1oe_G6fUS_9Q_jT0J-Yslo2USBiCwOgi3QIsPisVrNIr8U4hR_8CvQYLHACFt7n8z1MGO-CBtazlt6JG_hglwT0Sjn89B5iXa3Ai2FxiZY3Va50gSw&token_type=Bearer&expires_in=3600&scope=openid+okta.users.manage.self+okta.users.read.self`}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>My Details</span></a>
+                <a onClick={()=>{window.location.href = `https://myaccount.${BASE_HOST}/profile-management/?id_token=eyJraWQiOiJoNGJTckxybHFYdkRjWWtvZGpuOVFLLXBHRjREalJXNDBzWmtEQW1Ncl9NIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVpajY5cjl2OEhmSjZXTzBpNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5lY2IuY28udWsiLCJhdWQiOiIwb2E3NnltbDkybnFXQjdhcTBpNyIsImlhdCI6MTc3MTQ5Njk2OCwiZXhwIjoxNzcxNTAwNTY4LCJqdGkiOiJJRC5CUVNWOXhpVHcxTmlCczVoVlJhOEQ4Yll1UDFjUk5pZlNwYzlxalE5STJRIiwiYW1yIjpbInB3ZCJdLCJpZHAiOiIwb2E3enY3aTdjQnBpNDNBaDBpNyIsIm5vbmNlIjoiWXNHNzZqbyIsImF1dGhfdGltZSI6MTc3MTQ5NjkyNSwiYXRfaGFzaCI6ImdsV3hya0g0bDU1eTBWRUxPSXVwcncifQ.QVgaf3OCWz4sUnfmiII-eeZ4kEd0Ag5CQNO6EQZV_bv_0RjtELrGZhtepH_6L6vCqs-4rPcXwlhSNgmKeeXl6KUk3SY6k3wdTOfsOWlyV10Bt79laoOF2DOM7ATcJur2B8nsOVhp15Ucyh-4Mp4hNFHaVF_VOcPQd5wwsan1ME_7HO5M_677-QcAo_pps5N3Eea8yxckCNQOI-nXESO7pV4Twr6mWmxVrFz8tX_iaE-Jmk3gEou28w2NfShiIO4wZxFOEO_yCie7wCaB5eW1OElb4yBBqG4fzvxMRFGc4r-ptgIHO6dD9X7lB8KHMYbXO8mcq5EWsIKVnz6ZQcKO_w&access_token=eyJraWQiOiJoNGJTckxybHFYdkRjWWtvZGpuOVFLLXBHRjREalJXNDBzWmtEQW1Ncl9NIiwidHlwIjoiYXBwbGljYXRpb24vb2t0YS1pbnRlcm5hbC1hdCtqd3QiLCJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjhGaTVOeG5HRmZCWHlHcFVtYi0zQ2dDUk16dkdqbV85VFBxWWdOU3k2UmciLCJpc3MiOiJodHRwczovL2xvZ2luLmVjYi5jby51ayIsImF1ZCI6Imh0dHBzOi8vbG9naW4uZWNiLmNvLnVrIiwic3ViIjoiU3Jpa2FudGguRGFtYWNoYXJsYUBlY2IuY28udWsiLCJpYXQiOjE3NzE0OTY5NjgsImV4cCI6MTc3MTUwMDU2OCwiY2lkIjoiMG9hNzZ5bWw5Mm5xV0I3YXEwaTciLCJ1aWQiOiIwMHVpajY5cjl2OEhmSjZXTzBpNyIsInNjcCI6WyJvcGVuaWQiLCJva3RhLnVzZXJzLm1hbmFnZS5zZWxmIiwib2t0YS51c2Vycy5yZWFkLnNlbGYiXSwiYXV0aF90aW1lIjoxNzcxNDk2OTI1fQ.Q95qY-uifWt98MnQSdTefMtdSBSc5vT7CTwACdqT0fEkvC02hrIfK2EbNPA-oPw2XDXSUT26FPdiPN82hZwxS9_Ni-xPDhi2y3iuWmQI3nIgCFyRfNWJChxW3e5P5Q9ju74WAF_ps8xZ_gO_eUCOfIa6okqseuVHIwSsLhfP1PWh8HmgAhriZ3pLI24A_XXsdRknNYtttSeLxQ6cZ9lCBB5xXL3Jmm7vsnWx1oe_G6fUS_9Q_jT0J-Yslo2USBiCwOgi3QIsPisVrNIr8U4hR_8CvQYLHACFt7n8z1MGO-CBtazlt6JG_hglwT0Sjn89B5iXa3Ai2FxiZY3Va50gSw&token_type=Bearer&expires_in=3600&scope=openid+okta.users.manage.self+okta.users.read.self`}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>My Details</span></a>
               </li>
               <li className={`text-white ${styles.clubcontent}`}>
-                <a onClick={()=>{handleUserLinkClick(`https://annatest.play-cricket-staging.com/users/profiles/${data.user.id}/edit`,`https://www.play-cricket-staging.com/users/profiles/${data.user.id}/edit`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Play-Cricket Profile & Preference</span></a>
+                <a onClick={()=>{handleUserLinkClick(`https://annatest.${BASE_HOST}/users/profiles/${data.user.id}/edit`,`https://www.${BASE_HOST}/users/profiles/${data.user.id}/edit`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Play-Cricket Profile & Preference</span></a>
               </li>
               <li className={`text-white ${styles.clubcontent}`}>
-                <a onClick={()=>{handleUserLinkClick(`https://annatest.play-cricket-staging.com/users/profiles/${data.user.id}/edit`,`https://www.play-cricket-staging.com/users/profiles/${data.user.id}/edit`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Roles & Memberships</span></a>
+                <a onClick={()=>{handleUserLinkClick(`https://annatest.${BASE_HOST}/users/profiles/${data.user.id}/edit`,`https://www.${BASE_HOST}/users/profiles/${data.user.id}/edit`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Roles & Memberships</span></a>
               </li>
               <li className={`text-white ${styles.clubcontent}`}>
-                <a onClick={()=>{handleUserLinkClick(`https://annatest.play-cricket-staging.com/users/profiles/${data.user.id}/availability`,`https://www.play-cricket-staging.com/users/profiles/${data.user.id}/availability`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Availability</span></a>
+                <a onClick={()=>{handleUserLinkClick(`https://annatest.${BASE_HOST}/users/profiles/${data.user.id}/availability`,`https://www.${BASE_HOST}/users/profiles/${data.user.id}/availability`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Availability</span></a>
               </li>
               <li className={`text-white ${styles.clubcontent}`}>
-                <a onClick={()=>{handleUserLinkClick(`https://annatest.play-cricket-staging.com/users/child_accounts/new`,`https://www.play-cricket-staging.com/users/child_accounts/new`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Add Junior Account</span></a>
+                <a onClick={()=>{handleUserLinkClick(`https://annatest.${BASE_HOST}/users/child_accounts/new`,`https://www.${BASE_HOST}/users/child_accounts/new`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Add Junior Account</span></a>
               </li>
             </ul>
           )}
@@ -194,16 +195,16 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
               {openParents.includes(childParent.id) && (
                 <ul className="list-unstyled m-0 p-0">
                   <li className={`text-white ${styles.clubcontent}`}>
-                    <a onClick={()=>{handleUserLinkClick(`https://annatest.play-cricket-staging.com/player_stats/batting/${childParent.id}?rule_type_id=179`,`https://www.play-cricket-staging.com/player_stats/batting/${childParent.id}?rule_type_id=179 `)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Stats</span></a>
+                    <a onClick={()=>{handleUserLinkClick(`https://annatest.${BASE_HOST}/player_stats/batting/${childParent.id}?rule_type_id=179`,`https://www.${BASE_HOST}/player_stats/batting/${childParent.id}?rule_type_id=179 `)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Stats</span></a>
                   </li>
                   <li className={`text-white ${styles.clubcontent}`}>
-                    <a onClick={()=>{handleUserLinkClick(`https://annatest.play-cricket-staging.com/users/profiles/${childParent.id}/edit`,`https://www.play-cricket-staging.com/users/profiles/${childParent.id}/edit`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Play-Cricket Profile & Preference</span></a>
+                    <a onClick={()=>{handleUserLinkClick(`https://annatest.${BASE_HOST}/users/profiles/${childParent.id}/edit`,`https://www.${BASE_HOST}/users/profiles/${childParent.id}/edit`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Play-Cricket Profile & Preference</span></a>
                   </li>
                   <li className={`text-white ${styles.clubcontent}`}>
-                    <a onClick={()=>{handleUserLinkClick(`https://annatest.play-cricket-staging.com/users/profiles/${childParent.id}/edit`,`https://www.play-cricket-staging.com/users/profiles/${childParent.id}/edit`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Roles & Memberships</span></a>
+                    <a onClick={()=>{handleUserLinkClick(`https://annatest.${BASE_HOST}/users/profiles/${childParent.id}/edit`,`https://www.${BASE_HOST}/users/profiles/${childParent.id}/edit`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Roles & Memberships</span></a>
                   </li>
                   <li className={`text-white ${styles.clubcontent}`}>
-                    <a onClick={()=>{handleUserLinkClick(`https://annatest.play-cricket-staging.com/users/profiles/${childParent.id}/availability`,`https://www.play-cricket-staging.com/users/profiles/${childParent.id}/availability`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Availability</span></a>
+                    <a onClick={()=>{handleUserLinkClick(`https://annatest.${BASE_HOST}/users/profiles/${childParent.id}/availability`,`https://www.${BASE_HOST}/users/profiles/${childParent.id}/availability`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>Availability</span></a>
                   </li>
                 </ul>
               )}
