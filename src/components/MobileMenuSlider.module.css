@@ -1,0 +1,74 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1041;
+}
+.slider {
+  position: fixed;
+  left: -330px;
+  width: 330px;
+  height: 1667px;
+  min-height: 100vh;
+  border-right: 1px;
+  background: #F0F2F7;
+  padding: 40px 20px 20px 20px;
+  transition: left 0.3s ease-in-out;
+  z-index: 1052;
+}
+.open {
+  left: 0;
+}
+.logo{
+    display: flex;
+    width: 290px;
+    height: auto;
+    gap: 40px;
+    width: 100%;
+    justify-content: space-between;
+}
+.top{
+  height: 147px;
+}
+.logo>img{
+    width: 54px;
+    height: 54px;
+}
+.logo>svg{
+    cursor: pointer;
+    width:19px;
+    height:19px;
+}
+.club_container{
+    width: 100%;
+    max-width: 290px;
+    height: auto;
+
+}
+.club_container>div{
+  font-family: 'GT-Walsheim-Bold-Trial';
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: #0B416A;
+  width: 196px;
+  height: 23px;
+}
+.club_container>span{
+  display: block;
+  width: 76px;
+  height: 18px;
+  font-family: 'GT Walsheim-Regular-Trial';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0B416A;
+}
+.nav_container{
+  width: 100%;
+  max-width: 290px;
+  height: auto;
+}
