@@ -3,11 +3,10 @@ import styles from './header.module.css';
 import style from './topHeader.module.css';
 import headerlogo from '../assets/Cricket Club Logo.png';
 import arrow from '../assets/arrow right 24px.png';
-import './header.css';
 import { getPermissions } from '../utils/getPermissions';
 import { BASE_HOST } from '../utils/getHostName'; 
 
-export default function Header( {club,data}) {
+export default function Header( {club,data,onMobileMenuClick}) {
   const permissions = (data.roles[0].isCustom === false) && (data.roles[0].name === 'super_admin' || data.roles[0].name === 'main_administrator' || data.roles[0].name === 'ecb_admin') ? getPermissions() : data?.roles?.[0]?.permissions
   const [showClubInfo, setShowClubInfo] = useState(false);
   const [showUpdateClub, setShowUpdateClub] = useState(false)
@@ -110,23 +109,23 @@ export default function Header( {club,data}) {
     <nav className={`navbar navbar-expand-lg navbar-light border-bottom ${styles.container}`} ref={headerRef}>
       <div className={`d-none d-lg-flex align-items-center ${styles.logoContainer}`}>
         <img src={headerlogo} alt="logo"/>
-        <span className='text-nowrap'>{data?.website?.name}</span>
+        <span>{data?.website?.name}</span>
       </div>
-      <div className='d-flex d-lg-none justify-content-between align-items-center'>
-        <div className='navbar-toggler' type="button" data-toggle="collapse" data-target="#mainNavbar" style={{marginRight:"20%"}}>
-          <span className='navbar-toggler-icon'></span>
+      <div className='d-flex d-lg-none justify-content-between align-items-center w-100'>
+        <div className='navbar-toggler' type="button" data-toggle="collapse" style={{marginRight:"20%"}}>
+          <span className='navbar-toggler-icon' onClick ={()=>{onMobileMenuClick(true)}}></span>
         </div>
         <div className='text-nowrap' style={{fontFamily:'GT Walsheim Trial',fontWeight:800,fontSize:'20px',color:'#0B416A',lineHeight:'100%', marginRight:'10px'}}>{data?.website?.name}</div>
       </div>
       <div className='collapse navbar-collapse' id="mainNavbar" style={{flexGrow:'0',marginLeft:'auto',paddingRight:"0px"}}>
         <ul className={`navbar-nav ${styles["header-links"]} ${styles.headerNav}`}>
-          <li className={`nav-item text-nowrap`}><a className={`nav-link ${styles.cursor} ${activeLink === 'action center' ? 'active' : ''}`} onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/home`,data?.website?.subdomain,'action center')}>ACTION CENTER</a></li>
+          <li className={`nav-item text-nowrap`}><a className={`nav-link ${styles.cursor} ${activeLink === 'action center' ? styles.active : ''}`} onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/home`,data?.website?.subdomain,'action center')}>ACTION CENTER</a></li>
           {!(permissions?.day_to_day?.fixtures === false && permissions?.day_to_day?.find_a === false && permissions?.setup?.scoring_rules === false && permissions?.day_to_day?.results === false) &&
-            <li className={`nav-item text-nowrap dropdown hactive ${openmenu === 'fixtureandresults' ? 'show active' : null}`}>
+            <li className={`nav-item text-nowrap dropdown ${styles.hactive} ${openmenu === 'fixtureandresults' ? `show ${styles.active}` : ''}`}>
               <a her="#" className={`nav-link custom-toggle dropdown-toggle ${styles.ct}`} href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" onClick={()=>{toggleMenu("fixtureandresults")}}>FIXTURE &amp; RESULTS
                 <img src={arrow} alt="arrow" width="18px" height="18px" className={`arrow ${styles.arrow}`}/>
               </a>
-              <ul className={`dropdown-menu ${openmenu === 'fixtureandresults' ? 'show active' : ''}`} aria-labelledby="navbarDropdown">
+              <ul className={`dropdown-menu ${openmenu === 'fixtureandresults' ? `show ${styles.active}` : ''}`} aria-labelledby="navbarDropdown">
                 {!(permissions?.day_to_day?.fixtures === false && permissions?.day_to_day?.find_a === false && permissions?.setup?.scoring_rules === false) &&
                   <li>
                     <a className={`dropdown-item dropdown-toggle d-flex justify-content-between align-items-center ${styles.ct} ${openSubMenu === 'fixture' ? styles.sub_menu_active : ''}`} onClick={handleFixture} href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">Fixtures<span><svg className={`arrow ${openSubMenu === 'fixture' ? 'rotate' : ''}`} width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -149,7 +148,7 @@ export default function Header( {club,data}) {
               </ul>
             </li>
           }
-          <li className={`nav-item text-nowrap dropdown hactive ${openmenu === 'club' ? 'show active' : ''}`}>
+          <li className={`nav-item text-nowrap dropdown ${styles.hactive} ${openmenu === 'club' ? `show ${styles.active}` : ''}`}>
             <a her="#" className={`nav-link custom-toggle dropdown-toggle ${styles.ct}`} href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" onClick={()=>{toggleMenu('club');setShowClubInfo(!showClubInfo);setShowUpdateClub(false);}}>CLUB
               <img src={arrow} alt="arrow" width="18px" height="18px" className={`arrow ${styles.arrow}`}/>
             </a>
@@ -243,7 +242,7 @@ export default function Header( {club,data}) {
               </li>
             </ul>
           </li>
-          <li className={`nav-item text-nowrap dropdown hactive ${openmenu === 'people' ? 'show active' : ''}`}>
+          <li className={`nav-item text-nowrap dropdown ${styles.hactive} ${openmenu === 'people' ? `show ${styles.active}` : ''}`}>
             <a her="#" className={`nav-link custom-toggle dropdown-toggle ${styles.ct}`} href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" onClick={()=>{toggleMenu('people');setShowClubInfo(!showClubInfo);setShowUpdateClub(false);}}>PEOPLE
               <img src={arrow} alt="arrow" width="18px" height="18px" className={`arrow ${styles.arrow}`}/>
             </a>
@@ -282,9 +281,9 @@ export default function Header( {club,data}) {
             </ul>
           </li>
           {permissions?.setup?.teams &&
-            <li className='nav-item text-nowrap'><a className={`nav-link ${styles.cursor} ${activeLink === 'teams' ? 'active' : ''}`} onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/teams`,data?.website?.subdomain,'teams')}>TEAMS</a></li>
+            <li className='nav-item text-nowrap'><a className={`nav-link ${styles.cursor} ${activeLink === 'teams' ? styles.active : ''}`} onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/teams`,data?.website?.subdomain,'teams')}>TEAMS</a></li>
           }
-          <li className={`nav-item text-nowrap dropdown hactive ${openmenu === 'competitions' ? 'show' : null}`}>
+          <li className={`nav-item text-nowrap dropdown ${styles.hactive} ${openmenu === 'competitions' ? `show ${styles.active}` : ''}`}>
             <a her="#" className={`nav-link custom-toggle dropdown-toggle ${styles.ct} `} href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" onClick={()=>{toggleMenu("competitions")}}>COMPETITIONS
               <img src={arrow} alt="arrow" width="18px" height="18px" className={`arrow ${styles.arrow}`}/>
             </a>
@@ -310,7 +309,7 @@ export default function Header( {club,data}) {
               }
             </ul>
           </li>
-          <li className={`nav-item text-nowrap dropdown hactive ${openmenu === 'reports' ? 'show active' : null}`}>
+          <li className={`nav-item text-nowrap dropdown ${styles.hactive} ${openmenu === 'reports' ? `show ${styles.active}` : null}`}>
             <a her="#" className={`nav-link custom-toggle dropdown-toggle ${styles.ct}`} href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" onClick={()=>{toggleMenu("reports")}}>REPORTS
               <img src={arrow} alt="arrow" width="18px" height="18px" className={`arrow ${styles.arrow}`}/>
             </a>

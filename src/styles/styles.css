@@ -6,14 +6,16 @@
 .arrow{
     transition: transform 0.25s ease;
 }
-.custom-toggle:hover .arrow{
-    transform: rotate(90deg)
+@media (min-width : 992px) {
+  .custom-toggle:hover .arrow{
+      transform: rotate(90deg)
+  }
 }
 .dropdown.show > .custom-toggle .arrow{
     transform: rotate(90deg);
 }
 .arrow.rotate{
-   transform: rotate(90deg); 
+   transform: rotate(90deg)
 }
 
 
@@ -55,21 +57,21 @@
 
 @font-face {
   font-family: 'GT-Walsheim-Black-Trial';
-  src: url('/fonts/GT-Walsheim-Black-Trial.otf') format('opentype');
+  src: url('/react-nav/next/dist/fonts/GT-Walsheim-Black-Trial.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'GT-Walsheim-Bold-Trial';
-  src: url('/fonts/GT-Walsheim-Bold-Trial.otf') format('opentype');
+  src: url('/react-nav/next/dist/fonts/GT-Walsheim-Bold-Trial.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'AvenirNextLTPro-Cn';
-  src: url('/fonts/AvenirNextLTPro-Cn.otf') format('opentype');
+  src: url('/react-nav/next/dist/fonts/AvenirNextLTPro-Cn.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }

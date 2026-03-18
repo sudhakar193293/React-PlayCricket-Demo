@@ -1,6 +1,6 @@
 .slider {
   position: fixed;
-  top: 10;
+  top: 20;
   right: -320px;
   width: 320px;
   height: auto;
@@ -11,6 +11,25 @@
   z-index: 1050;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 991px){
+  .slider
+    {
+      position: fixed;
+      top: 20;
+      right:0px;
+      top: -100vh;
+      width: 100vw;
+      /* height: auto; */
+      min-height: 100vh;
+      background: #fff;
+      box-shadow: -4px 0 10px rgba(0, 0, 0, 0.15);
+      transition: top 0.3s ease-in-out;
+      z-index: 1050;
+      display: flex;
+      flex-direction: column;
+    }
 }
 
 @media (min-width: 1024px){
@@ -71,6 +90,11 @@
  
 .open {
   right: 0;
+}
+@media (max-width: 991px){
+  .open {
+    top: 0 !important;
+  }
 }
  
 .backdrop {
@@ -154,4 +178,25 @@
 color: #e0e0e0 !important;
 background-color: #0461A7 !important;
 cursor: pointer;
+}
+.mobile_top{
+  width: 100%;
+  min-width: 390px;
+  height: 111px;
+  background-color: #F0F2F7;
+  position: relative;
+}
+.logo_container{
+  width:100%;
+  min-width: 390px;
+  height: 80px;
+  top: 30px;
+  padding-top: 19px;
+  padding-right: 30px;
+  padding-bottom: 19px;
+  padding-left: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  position: absolute;
 }

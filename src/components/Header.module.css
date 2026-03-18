@@ -53,7 +53,7 @@
     width:280px;
 }
 .headerNav :global(.dropdown-menu)>li>a{
-    font-family: GT-Walsheim-Regular-Trial;
+    font-family: 'GT-Walsheim-Regular-Trial';
     font-weight: 400;
     font-size: 14px;
     line-height: 100%;
@@ -71,7 +71,7 @@
 }
 
 .headerNav :global(.dropdown-menu) ul>li>a{
-    font-family: GT-Walsheim-Regular-Trial;
+    font-family: 'GT-Walsheim-Regular-Trial';
     font-weight: 400;
     font-size: 14px;
     line-height: 100%;
@@ -107,4 +107,129 @@
 .cursor{
     cursor: pointer;
 }
+@media (min-width: 992px) and (max-width:1030px){
+.header-links > li{
+    margin-left: 0px !important;
+}
+}
+@media (max-width: 991px){
+  .header-links > li{
+    min-height: 52px;
+    width: 290px;
+    border-bottom: 2px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+  }
+  .header-links > li:not(:last-child) > a{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-transform: none;
+  }
+  .header-links > li:not(:last-child) > a > span{
+    width: 226px;
+    height: 18px;
+    font-family: 'GT-Walsheim-Bold-Trial';
+    color: #0B416A !important;
+    font-weight: 700;
+    font-style: Bd;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: none;
+  }
+  .exit_Admin>a{
+      font-family:'AvenirNextLTPro-Cn';
+      font-weight:700;
+      font-size:16px;
+      color:#626D79 !important;
+          /* line-height: 100%; */
+      letter-spacing: 0%;
+      text-transform: none;
+  }
+  .header-links>li>a>svg{
+    width: 20px;
+    height: 20px;
+  }
+  .headerNav :global(.dropdown-menu) ul>li>a>svg{
+    width: 20px;
+    height: 20px;
+  }
+  .headerNav :global(.dropdown-menu){
+    background-color: transparent;
+    border: none;
+  }
+  .headerNav :global(.dropdown-menu)>li{
+    width: 100%;
+    max-width: 300px;
+    min-height: 44px;
+    border-bottom: 2px;
+    /* padding: 10px 30px 10px 30px; */
+  }
+
+  .headerNav :global(.dropdown-menu)>li>a>span:first-child{
+    font-family: 'GT-Walsheim-Regular-Trial';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+
+  .headerNav :global(.dropdown-menu) ul>li{
+    width: 100%;
+    max-width: 300px;
+    min-height: 44px;
+    border-bottom: 2px;
+  }
+  .headerNav :global(.dropdown-menu) ul>li>a{
+    display: flex;
+    gap: 10px;
+    font-family: 'GT-Walsheim-Regular-Trial';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    padding: 10px 15px 10px 26px !important;
+    color: #0B416A;
+  }
+  
+  .sub_menu_active{
+    font-family: 'GT-Walsheim-Regular-Trial' !important;
+    color: #0B416A !important;
+  }
+  .hyphen{
+    color: #7BC058;
+    display: inline-block;
+    transform: scaleX(1)!important;
+  }
+  .headerNav :global(.dropdown-menu)>li>a>span>svg{
+    width: 20px;
+    height: 20px;
+  }
+  .headerNav :global(.dropdown-menu) ul>li>a>span{
+    width: 20px;
+    height: 20px;
+    font-family: cursive;
+    font-weight: 600;
+  }
+}
+
+
+
+.active{
+    background-color: white;
+}
+.hactive:hover{
+    background-color: white;
+}
+@media (max-width: 991px){
+    .active{
+        background-color: transparent;
+    }
+    .hactive:hover{
+        background-color: transparent;
+    }
+}
+
 
