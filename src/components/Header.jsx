@@ -122,7 +122,7 @@ export default function Header( {club,data,onMobileMenuClick}) {
           <li className={`nav-item text-nowrap`}><a className={`nav-link ${styles.cursor} ${activeLink === 'action center' ? styles.active : ''}`} onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/home`,data?.website?.subdomain,'action center')}>ACTION CENTER</a></li>
           {!(permissions?.day_to_day?.fixtures === false && permissions?.day_to_day?.find_a === false && permissions?.setup?.scoring_rules === false && permissions?.day_to_day?.results === false) &&
             <li className={`nav-item text-nowrap dropdown ${styles.hactive} ${openmenu === 'fixtureandresults' ? `show ${styles.active}` : ''}`}>
-              <a her="#" className={`nav-link custom-toggle dropdown-toggle ${styles.ct}`} href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" onClick={()=>{toggleMenu("fixtureandresults")}}>FIXTURE &amp; RESULTS
+              <a her="#" className={`nav-link custom-toggle dropdown-toggle ${styles.ct}`} href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" onClick={()=>{toggleMenu("fixtureandresults")}}>FIXTURES & RESULTS
                 <img src={arrow} alt="arrow" width="18px" height="18px" className={`arrow ${styles.arrow}`}/>
               </a>
               <ul className={`dropdown-menu ${openmenu === 'fixtureandresults' ? `show ${styles.active}` : ''}`} aria-labelledby="navbarDropdown">
@@ -144,7 +144,7 @@ export default function Header( {club,data,onMobileMenuClick}) {
                   </li>
                 }
                 {permissions?.day_to_day?.results && <li><a className="dropdown-item" onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/results`,data?.website?.subdomain)}>Results</a></li>}
-                {permissions?.day_to_day?.fixtures && <li><a className="dropdown-item" onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/player_availability/fixtures?email=false`,data?.website?.subdomain)}>Player Availability (&email)</a></li>}
+                {permissions?.day_to_day?.fixtures && <li><a className="dropdown-item" onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/player_availability/fixtures?email=false`,data?.website?.subdomain)}>Player Availability</a></li>}
               </ul>
             </li>
           }
@@ -183,7 +183,7 @@ export default function Header( {club,data,onMobileMenuClick}) {
                     <>
                       <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/about_us/joining_message`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Joining message</a></li>
                       <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/about_us/affiliations`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Affiliations</a></li>
-                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/about_us/sponsors`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Sponsers</a></li>
+                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/about_us/sponsors`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Sponsors</a></li>
                     </>
                   }
                   {permissions?.setup?.privacy_notices &&

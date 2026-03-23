@@ -166,7 +166,7 @@ export default function MobileNavElements({data}) {
                 <>
                   <li><a className='dropdown-item text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/about_us/joining_message`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Joining message</a></li>
                   <li><a className='dropdown-item text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/about_us/affiliations`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Affiliations</a></li>
-                  <li><a className='dropdown-item text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/about_us/sponsors`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Sponsers</a></li>
+                  <li><a className='dropdown-item text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/about_us/sponsors`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Sponsors</a></li>
                 </>
               }
               {permissions?.setup?.privacy_notices &&

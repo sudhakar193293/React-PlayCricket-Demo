@@ -76,13 +76,11 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
           </div>
         </div>
         {link === 'myclubs' ? 
-        <div className={`${styles.accord} pt-3`}>
+        <div className={`${styles.accord}`}>
           <div>
-            {openParents.length > 0 &&
-              <div className={`${styles.collapse}`} onClick={()=>{setOpenParents([])}}>
-                <div className='text-white'>COLLAPSE &nbsp;ALL</div>
-              </div>
-            }
+            <div style={{visibility : openParents.length > 0 ? 'visible' : 'hidden' }} className={`${styles.collapse}`} onClick={()=>{setOpenParents([])}}>
+              <div className='text-white'>COLLAPSE ALL</div>
+            </div>
             <div>
               {data?.roles?.map((parent) => {
                 return(
@@ -90,7 +88,7 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
           
                     {/* Dropdown Header */}
                     <div
-                      className={`${styles.parentContainer} ${openParents.includes(parent.website.id)? styles.selectedParent:''}`}
+                      className={`${styles.parentContainer_club} ${openParents.includes(parent.website.id)? styles.selectedParent:''}`}
                       onClick={() => toggleParent(parent.website.id)}
                     >
                       <div className="d-flex align-items-center">
@@ -134,17 +132,15 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
             </div>
           </div>
         </div>:
-        <div className={`${styles.accord} pt-3`}>
-          {openParents.length > 0 &&
-            <div className={`${styles.collapse}`} onClick={()=>{setOpenParents([])}}>
-              <div className='text-white'>COLLAPSE &nbsp;ALL</div>
-            </div>
-          }
+        <div className={`${styles.accord}`}>
+          <div style={{visibility : openParents.length > 0 ? 'visible' : 'hidden' }} className={`${styles.collapse} ${styles.collapse_account}`} onClick={()=>{setOpenParents([])}}>
+            <div className='text-white'>COLLAPSE &nbsp;ALL</div>
+          </div>
           <div
             className={`${styles.parentContainer} ${openParents.includes(data?.user?.id)? styles.selectedParent:''}`}
             onClick={() => toggleParent(data?.user?.id)}
           >
-            <div className="d-flex align-items-center">
+            <div className={`d-flex align-items-center ${styles.parentUserContainer}`}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 1C18.072 1 23 5.928 23 12C23 18.072 18.072 23 12 23C5.928 23 1 18.072 1 12C1 5.928 5.928 1 12 1ZM12 13C9.78944 13 8.37066 13.9834 7.4502 15.2217C6.66684 16.2756 6.247 17.522 6.0752 18.5C7.64021 19.9278 9.72045 20.7998 12 20.7998C14.2793 20.7998 16.3589 19.9276 17.9238 18.5C17.752 17.5221 17.3331 16.2755 16.5498 15.2217C15.6293 13.9834 14.2106 13 12 13ZM12 3.2002C7.149 3.2002 3.2002 7.149 3.2002 12C3.2002 13.6869 3.67892 15.2639 4.50586 16.6045C4.80047 15.7483 5.2346 14.8504 5.8457 14.0283C6.74038 12.8248 8.01455 11.7928 9.74121 11.3037C8.68904 10.584 8 9.37436 8 8C8 5.78667 9.78667 4 12 4C14.2133 4 16 5.78667 16 8C16 9.37465 15.3104 10.584 14.2578 11.3037C15.9849 11.7927 17.2595 12.8246 18.1543 14.0283C18.7653 14.8503 19.1986 15.7484 19.4932 16.6045C20.3203 15.2638 20.7998 13.6871 20.7998 12C20.7998 7.149 16.851 3.2002 12 3.2002ZM12 6C10.8912 6 10 6.89124 10 8C10 9.10876 10.8912 10 12 10C13.1088 10 14 9.10876 14 8C14 6.89124 13.1088 6 12 6Z" fill="#FFFFFF"/>
               </svg>
@@ -159,7 +155,7 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
           {openParents.includes(data?.user?.id) && (
             <ul className="list-unstyled m-0 p-0">
               <li className={`text-white ${styles.clubcontent}`}>
-                <a onClick={()=>{handleUserLinkClick(`https://annates.${BASE_HOST}.com/player_stats/batting/${data.user.id}?rule_type_id=179`,`https://www.${BASE_HOST}/player_stats/batting/${data.user.id}?rule_type_id=179`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>My Stats</span></a>
+                <a onClick={()=>{handleUserLinkClick(`https://annatest.${BASE_HOST}/player_stats/batting/${data.user.id}?rule_type_id=179`,`https://www.${BASE_HOST}/player_stats/batting/${data.user.id}?rule_type_id=179`)}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>My Stats</span></a>
               </li>
               <li className={`text-white ${styles.clubcontent}`}>
                 <a onClick={()=>{window.location.href = `https://myaccount.${BASE_HOST}/profile-management/?id_token=eyJraWQiOiJoNGJTckxybHFYdkRjWWtvZGpuOVFLLXBHRjREalJXNDBzWmtEQW1Ncl9NIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVpajY5cjl2OEhmSjZXTzBpNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5lY2IuY28udWsiLCJhdWQiOiIwb2E3NnltbDkybnFXQjdhcTBpNyIsImlhdCI6MTc3MTQ5Njk2OCwiZXhwIjoxNzcxNTAwNTY4LCJqdGkiOiJJRC5CUVNWOXhpVHcxTmlCczVoVlJhOEQ4Yll1UDFjUk5pZlNwYzlxalE5STJRIiwiYW1yIjpbInB3ZCJdLCJpZHAiOiIwb2E3enY3aTdjQnBpNDNBaDBpNyIsIm5vbmNlIjoiWXNHNzZqbyIsImF1dGhfdGltZSI6MTc3MTQ5NjkyNSwiYXRfaGFzaCI6ImdsV3hya0g0bDU1eTBWRUxPSXVwcncifQ.QVgaf3OCWz4sUnfmiII-eeZ4kEd0Ag5CQNO6EQZV_bv_0RjtELrGZhtepH_6L6vCqs-4rPcXwlhSNgmKeeXl6KUk3SY6k3wdTOfsOWlyV10Bt79laoOF2DOM7ATcJur2B8nsOVhp15Ucyh-4Mp4hNFHaVF_VOcPQd5wwsan1ME_7HO5M_677-QcAo_pps5N3Eea8yxckCNQOI-nXESO7pV4Twr6mWmxVrFz8tX_iaE-Jmk3gEou28w2NfShiIO4wZxFOEO_yCie7wCaB5eW1OElb4yBBqG4fzvxMRFGc4r-ptgIHO6dD9X7lB8KHMYbXO8mcq5EWsIKVnz6ZQcKO_w&access_token=eyJraWQiOiJoNGJTckxybHFYdkRjWWtvZGpuOVFLLXBHRjREalJXNDBzWmtEQW1Ncl9NIiwidHlwIjoiYXBwbGljYXRpb24vb2t0YS1pbnRlcm5hbC1hdCtqd3QiLCJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjhGaTVOeG5HRmZCWHlHcFVtYi0zQ2dDUk16dkdqbV85VFBxWWdOU3k2UmciLCJpc3MiOiJodHRwczovL2xvZ2luLmVjYi5jby51ayIsImF1ZCI6Imh0dHBzOi8vbG9naW4uZWNiLmNvLnVrIiwic3ViIjoiU3Jpa2FudGguRGFtYWNoYXJsYUBlY2IuY28udWsiLCJpYXQiOjE3NzE0OTY5NjgsImV4cCI6MTc3MTUwMDU2OCwiY2lkIjoiMG9hNzZ5bWw5Mm5xV0I3YXEwaTciLCJ1aWQiOiIwMHVpajY5cjl2OEhmSjZXTzBpNyIsInNjcCI6WyJvcGVuaWQiLCJva3RhLnVzZXJzLm1hbmFnZS5zZWxmIiwib2t0YS51c2Vycy5yZWFkLnNlbGYiXSwiYXV0aF90aW1lIjoxNzcxNDk2OTI1fQ.Q95qY-uifWt98MnQSdTefMtdSBSc5vT7CTwACdqT0fEkvC02hrIfK2EbNPA-oPw2XDXSUT26FPdiPN82hZwxS9_Ni-xPDhi2y3iuWmQI3nIgCFyRfNWJChxW3e5P5Q9ju74WAF_ps8xZ_gO_eUCOfIa6okqseuVHIwSsLhfP1PWh8HmgAhriZ3pLI24A_XXsdRknNYtttSeLxQ6cZ9lCBB5xXL3Jmm7vsnWx1oe_G6fUS_9Q_jT0J-Yslo2USBiCwOgi3QIsPisVrNIr8U4hR_8CvQYLHACFt7n8z1MGO-CBtazlt6JG_hglwT0Sjn89B5iXa3Ai2FxiZY3Va50gSw&token_type=Bearer&expires_in=3600&scope=openid+okta.users.manage.self+okta.users.read.self`}}><span className={`${styles.hyphen}`}>&mdash;</span><span className={`${styles.childContent}`}>My Details</span></a>
@@ -221,24 +217,30 @@ const Slider = ({ isOpen, onClose, link, onClubSelect, data }) => {
           ))}
         </div>}
         <div className={`${styles.content}`}>
-          <a href="https://play-cricket.ecb.co.uk/hc/en-us?_ga=2.170838370.376644104.1771493285-1989104338.1771493285" className="d-flex align-items-center">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10.9 18.6H13.1V16.4H10.9V18.6ZM12 1C5.928 1 1 5.928 1 12C1 18.072 5.928 23 12 23C18.072 23 23 18.072 23 12C23 5.928 18.072 1 12 1ZM12 20.8C7.149 20.8 3.2 16.851 3.2 12C3.2 7.149 7.149 3.2 12 3.2C16.851 3.2 20.8 7.149 20.8 12C20.8 16.851 16.851 20.8 12 20.8ZM12 5.4C9.569 5.4 7.6 7.369 7.6 9.8H9.8C9.8 8.59 10.79 7.6 12 7.6C13.21 7.6 14.2 8.59 14.2 9.8C14.2 12 10.9 11.725 10.9 15.3H13.1C13.1 12.825 16.4 12.55 16.4 9.8C16.4 7.369 14.431 5.4 12 5.4Z" fill="#FFFFFF"/>
-            </svg>
-            <span className="text-white">Help Center</span>
-          </a>
-          <a href="" className="d-flex align-items-center">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" fill="#FFFFFF"/>
-            </svg>
-            <span className="text-white">Log out</span>
-          </a>
-          <a href="" className="d-flex align-items-center">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" fill="#FFFFFF"/>
-            </svg>
-            <span className="text-white">Log out of all ECB apps</span>
-          </a>
+          {link !== 'myclubs' && 
+            <a href="https://play-cricket.ecb.co.uk/hc/en-us?_ga=2.170838370.376644104.1771493285-1989104338.1771493285" className="d-flex align-items-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.9 18.6H13.1V16.4H10.9V18.6ZM12 1C5.928 1 1 5.928 1 12C1 18.072 5.928 23 12 23C18.072 23 23 18.072 23 12C23 5.928 18.072 1 12 1ZM12 20.8C7.149 20.8 3.2 16.851 3.2 12C3.2 7.149 7.149 3.2 12 3.2C16.851 3.2 20.8 7.149 20.8 12C20.8 16.851 16.851 20.8 12 20.8ZM12 5.4C9.569 5.4 7.6 7.369 7.6 9.8H9.8C9.8 8.59 10.79 7.6 12 7.6C13.21 7.6 14.2 8.59 14.2 9.8C14.2 12 10.9 11.725 10.9 15.3H13.1C13.1 12.825 16.4 12.55 16.4 9.8C16.4 7.369 14.431 5.4 12 5.4Z" fill="#FFFFFF"/>
+              </svg>
+              <span className="text-white">Help Center</span>
+            </a>
+          }
+          {/* {link !== 'myclubs' && 
+            <a href="" className="d-flex align-items-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" fill="#FFFFFF"/>
+              </svg>
+              <span className="text-white">Log out</span>
+            </a>
+          } */}
+          {/* {link !== 'myclubs' && 
+            <a href="" className="d-flex align-items-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" fill="#FFFFFF"/>
+              </svg>
+              <span className="text-white">Log out of all ECB apps</span>
+            </a>
+          } */}
         </div>
       </div>
     </>
