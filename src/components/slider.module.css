@@ -47,7 +47,7 @@
 }
 .collapse>div{
     text-align: right;
-    font-family: AvenirNextLTPro-Cn;
+    font-family: 'AvenirNextLTPro-BoldCn';
     font-weight: 700;
     font-style: Bold;
     font-size: 14px;
@@ -59,6 +59,18 @@
 
 .parentContainer{
   width: 390px;
+  min-height: 48px;
+  height: auto;
+  opacity: 1;
+  padding-left: 20px;
+  gap: 10px;
+  border-bottom-width: 2px;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.parentContainer_club{
+  width: 390px;
   min-height: 38px;
   height: auto;
   opacity: 1;
@@ -66,6 +78,12 @@
   gap: 10px;
   border-bottom-width: 2px;
   display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.parentContainer_club>div{
+  gap:10px;
+  align-items: center;
 }
 .parentContainer:hover{
   background-color: #0461A7;
@@ -79,9 +97,9 @@
 }
 .parentContent{
   width: 286px;
-  /* height: 23px; */
+  height: 23px;
   opacity: 1;
-  font-family: GT-Walsheim-Bold-Trial;
+  font-family: 'GT-Walsheim-Bold-Trial';
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
@@ -120,7 +138,7 @@
   text-decoration: none;
 }
 .content>a>span{
-  font-family: GT-Walsheim-Bold-Trial;
+  font-family: 'GT-Walsheim-Bold-Trial';
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
@@ -160,12 +178,14 @@
   align-items: center;
   width: 20px;
   height: 20px;
-  transform: scaleX(0.7);
+  transform: scaleX(1);
+  font-family: cursive;
+  font-weight: 600;
 }
 .childContent{
   width: 250px;
   height: 18px;
-  font-family: GT-Walsheim-Regular-Trial;
+  font-family: 'GT-Walsheim-Regular-Trial';
   font-weight: 400;
   font-size: 16px;
   line-height: 100%;
@@ -199,4 +219,43 @@ cursor: pointer;
   justify-content: space-between;
   gap: 10px;
   position: absolute;
+}
+
+@media (max-width: 991px){
+  .parentUserContainer{
+    padding-top: 10px;
+  }
+  .parentContent{
+    font-family: 'GT-Walsheim-Bold-Trial';
+    width: 286px;
+    height: 18px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+  .collapse_account{
+    display: none;
+  }
+  .childContent{
+    width: 250px;
+    height: 18px;
+    font-family: 'GT-Walsheim-Regular-Trial';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    display: flex;
+    align-items: center;
+  }
+  .content>a>span{
+    font-family: 'GT-Walsheim-Bold-Trial';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    width: 286px;
+    height: 23px;
+    opacity: 1;
+  }
 }

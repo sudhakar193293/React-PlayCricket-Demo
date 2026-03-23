@@ -3,6 +3,7 @@ import TopHeader from './TopHeader';
 import Header from './Header';
 import topStyles from './topHeader.module.css';
 import styles from './header.module.css';
+import '../../src/styles/bootstrap-scoped.min.css';
 import '../../src/styles/styles.css';
 import Slider from './Slider';
 import MobileMenuSlider from './MobileMenuSlider';
@@ -20,6 +21,7 @@ export default function MainHeader({clubs,data}) {
   const clubHandler = (c) => {
     setSelectedClub(c);
   }
+  console.log("version after css changes");
   return (
     <>
     {(data?.headerData) && <MobileMenuSlider isOpen={isMobileSliderOpen} onClose={()=>setIsMobileSlider(false)} data={data.headerData}/>}

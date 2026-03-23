@@ -3,9 +3,14 @@
     padding: 7px 24px 5px 24px !important;
     height: 60px;
     width: 100%;
-    gap: 10px;
     display: flex !important;
     justify-content: space-between !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 991px){
+  .container{
+    box-shadow: none;
+  }
 }
 .logoContainer{
     width: auto;
@@ -32,6 +37,7 @@
 .header-links{
     display: flex;
     justify-content: space-between;
+    margin-top: 10px !important;
 }
 .header-links > li{
     margin-left: 2px;
@@ -69,7 +75,9 @@
     font-family: 'GT-Walsheim-Bold-Trial';
     color:#0B416A;
 }
-
+.headerNav :global(.dropdown-menu)>li>a:hover>span>svg path{
+  fill:#0B416A;
+}
 .headerNav :global(.dropdown-menu) ul>li>a{
     font-family: 'GT-Walsheim-Regular-Trial';
     font-weight: 400;
@@ -84,7 +92,7 @@
     color:#0B416A !important;
 }
 .exit_Admin>a{
-    font-family:'AvenirNextLTPro-Cn';
+    font-family:'AvenirNextLTPro-BoldCn';
     font-weight:700;
     font-size: 14px;
     color:#626D79 !important;
@@ -101,7 +109,7 @@
     display: inline-block;
     width: 2px;
     height: 28px;
-    margin-top: 1.6%;
+    margin-top: 0.5%;
     background-color: #7BC058;
 }
 .cursor{
@@ -157,8 +165,9 @@
     height: 20px;
   }
   .headerNav :global(.dropdown-menu){
-    background-color: transparent;
-    border: none;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
   .headerNav :global(.dropdown-menu)>li{
     width: 100%;
