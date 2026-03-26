@@ -97,7 +97,7 @@
 }
 .parentContent{
   width: 286px;
-  height: 23px;
+  height: auto;
   opacity: 1;
   font-family: 'GT-Walsheim-Bold-Trial';
   font-weight: 700;

@@ -21,7 +21,6 @@ export default function MainHeader({clubs,data}) {
   const clubHandler = (c) => {
     setSelectedClub(c);
   }
-  console.log("version after css changes");
   return (
     <>
     {(data?.headerData) && <MobileMenuSlider isOpen={isMobileSliderOpen} onClose={()=>setIsMobileSlider(false)} data={data.headerData}/>}

@@ -3584,7 +3584,7 @@ mark,
 }
 
 [id*="header-root"] .collapse:not(.show) {
-  display: none;
+  display: none !important;
 }
 
 [id*="header-root"] .collapsing {
