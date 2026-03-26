@@ -19,7 +19,7 @@ export default function TopHeader({clubs,sendData, onMenuClick, data}){
           }
       }
       document.addEventListener("mousedown",handleClickOutside);
-      console.log('Loading header...');
+      console.log('Loading headers...');
       return () => 
           document.removeEventListener('mousedown',handleClickOutside);
     },[])

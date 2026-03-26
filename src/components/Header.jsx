@@ -261,7 +261,7 @@ export default function Header( {club,data,onMobileMenuClick}) {
                   {permissions?.day_to_day?.members &&
                     <>
                       <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/users?initial=true`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Member database</a></li>
-                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}site_admin/inactive_member_workflows`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Inactive members</a></li>
+                      <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/inactive_member_workflows`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Inactive members</a></li>
                       <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/injury_reports`,data?.website?.subdomain)}><span className={`${styles.hyphen}`}>&mdash;&nbsp;&nbsp;</span>Injury reporting</a></li>
                     </>
                   }
@@ -277,7 +277,7 @@ export default function Header( {club,data,onMobileMenuClick}) {
                 </ul>
                 )}
               </li>
-              <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/website_configurations/badge`,data?.website?.subdomain)}>Emails</a></li>
+              <li><a className='dropdown-item text-dark text-decoration-none' onClick={()=>handleLinkClick(`https://annatest.${BASE_HOST}/site_admin/emails/email_log`,data?.website?.subdomain)}>Emails</a></li>
             </ul>
           </li>
           {permissions?.setup?.teams &&
